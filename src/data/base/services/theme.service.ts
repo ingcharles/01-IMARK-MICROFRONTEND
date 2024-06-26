@@ -4,7 +4,7 @@ import { Injectable, signal } from "@angular/core";
 	providedIn: "root",
 })
 export class ThemeService {
-	themeSignal = signal<string>("dark");
+	themeSignal = signal<string>("light");
 
 	setTheme(theme: string) {
 		this.themeSignal.set(theme);

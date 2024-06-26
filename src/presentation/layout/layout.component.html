@@ -1,5 +1,15 @@
 
-
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" (click)="toggleTheme()">
+  <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+  <button mat-icon-button>
+    @if (themeService.themeSignal() === 'dark'){
+      <mat-icon>bedtime</mat-icon>
+    } @else {
+      <mat-icon>brightness_5</mat-icon>
+    }
+  </button>
+</div>
 <mat-toolbar>
   <button mat-icon-button >
     <mat-icon>menu</mat-icon>
@@ -7,7 +17,7 @@
   <span>My App</span>
 
   <div class="theme-control">
-    <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
+    <mat-slide-toggle (click)="toggleTheme()"></mat-slide-toggle>
     <button mat-icon-button>
       @if (themeService.themeSignal() === 'dark'){
         <mat-icon>bedtime</mat-icon>
@@ -17,7 +27,7 @@
     </button>
   </div>
 </mat-toolbar>
-
+<!--
 <div class="container w-100">
   <div class="d-flex flex-column">
     <div class="theme-controls">
@@ -222,7 +232,7 @@
 
 
   </div>
-</div>
+</div> -->
 <!-- <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer

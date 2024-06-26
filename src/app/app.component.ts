@@ -1,8 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThemeService } from '../data/base/services/theme.service';
 import { LayoutComponent } from '../presentation/layout/layout.component';
-import { ThemeService } from '../data/base/services/theme-service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',

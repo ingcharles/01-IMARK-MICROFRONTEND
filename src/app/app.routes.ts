@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: 'create-localizacion-prueba',
     loadComponent: () =>
-      import('../presentation/localizacion-padre/create-localizacion-prueba/create-localizacion-prueba.component').then(
+      import('../presentation/localizacion-padre/components/create-localizacion-prueba/create-localizacion-prueba.component').then(
         (c) => c.CreateLocalizacionPruebaComponent
       ),
       title: 'Dashboard'
