@@ -1,0 +1,270 @@
+
+
+<mat-toolbar>
+  <button mat-icon-button >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+
+  <div class="theme-control">
+    <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
+    <button mat-icon-button>
+      @if (themeService.themeSignal() === 'dark'){
+        <mat-icon>bedtime</mat-icon>
+      } @else {
+        <mat-icon>brightness_5</mat-icon>
+      }
+    </button>
+  </div>
+</mat-toolbar>
+
+<div class="container w-100">
+  <div class="d-flex flex-column">
+    <div class="theme-controls">
+      <div class="color-picker-wrapper">
+        <div class="color-picker-overflow">
+          <input
+            matInput
+            id="color-input"
+            type="color"
+
+          />
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Buttons</h2>
+      <section>
+        <div class="example-label">Basic</div>
+        <div class="example-button-row">
+          <button mat-button>Basic</button>
+          <button mat-button color="primary">Primary</button>
+          <button mat-button color="accent">Accent</button>
+          <button mat-button color="warn">Warn</button>
+          <button mat-button disabled>Disabled</button>
+          <a mat-button href="https://www.google.com/" target="_blank">Link</a>
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+      <section>
+        <div class="example-label">Raised</div>
+        <div class="example-button-row">
+          <button mat-raised-button>Basic</button>
+          <button mat-raised-button color="primary">Primary</button>
+          <button mat-raised-button color="accent">Accent</button>
+          <button mat-raised-button color="warn">Warn</button>
+          <button mat-raised-button disabled>Disabled</button>
+          <a mat-raised-button href="https://www.google.com/" target="_blank"
+            >Link</a
+          >
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+      <section>
+        <div class="example-label">Stroked</div>
+        <div class="example-button-row">
+          <button mat-stroked-button>Basic</button>
+          <button mat-stroked-button color="primary">Primary</button>
+          <button mat-stroked-button color="accent">Accent</button>
+          <button mat-stroked-button color="warn">Warn</button>
+          <button mat-stroked-button disabled>Disabled</button>
+          <a mat-stroked-button href="https://www.google.com/" target="_blank"
+            >Link</a
+          >
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+      <section>
+        <div class="example-label">Flat</div>
+        <div class="example-button-row">
+          <button mat-flat-button>Basic</button>
+          <button mat-flat-button color="primary">Primary</button>
+          <button mat-flat-button color="accent">Accent</button>
+          <button mat-flat-button color="warn">Warn</button>
+          <button mat-flat-button disabled>Disabled</button>
+          <a mat-flat-button href="https://www.google.com/" target="_blank"
+            >Link</a
+          >
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+      <section>
+        <div class="example-label">Icon</div>
+        <div class="example-button-row">
+          <div class="example-flex-container">
+            <button
+              mat-icon-button
+              aria-label="Example icon button with a vertical three dot icon"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Example icon button with a home icon"
+            >
+              <mat-icon>home</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="accent"
+              aria-label="Example icon button with a menu icon"
+            >
+              <mat-icon>menu</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              aria-label="Example icon button with a heart icon"
+            >
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              disabled
+              aria-label="Example icon button with a open in new tab icon"
+            >
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+          </div>
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+      <section>
+        <div class="example-label">FAB</div>
+        <div class="example-button-row">
+          <div class="example-flex-container d-flex">
+            <div class="example-button-container">
+              <button
+                mat-fab
+                color="primary"
+                aria-label="Example icon button with a delete icon"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container">
+              <button
+                mat-fab
+                color="accent"
+                aria-label="Example icon button with a bookmark icon"
+              >
+                <mat-icon>bookmark</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container">
+              <button
+                mat-fab
+                color="warn"
+                aria-label="Example icon button with a home icon"
+              >
+                <mat-icon>home</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container">
+              <button
+                mat-fab
+                disabled
+                aria-label="Example icon button with a heart icon"
+              >
+                <mat-icon>favorite</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+      <section>
+        <div class="example-label">Mini FAB</div>
+        <div class="example-button-row">
+          <div class="example-flex-container d-flex">
+            <div class="example-button-container">
+              <button
+                mat-mini-fab
+                color="primary"
+                aria-label="Example icon button with a menu icon"
+              >
+                <mat-icon>menu</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container">
+              <button
+                mat-mini-fab
+                color="accent"
+                aria-label="Example icon button with a plus one icon"
+              >
+                <mat-icon>plus_one</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container">
+              <button
+                mat-mini-fab
+                color="warn"
+                aria-label="Example icon button with a filter list icon"
+              >
+                <mat-icon>filter_list</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container">
+              <button
+                mat-mini-fab
+                disabled
+                aria-label="Example icon button with a home icon"
+              >
+                <mat-icon>home</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+  </div>
+</div>
+<!-- <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      @for (item of rootRoutes; track $index) {
+      <a
+        mat-list-item
+        [routerLink]="item.path"
+        #link="routerLinkActive"
+        routerLinkActive
+        [activated]="link.isActive"
+      >
+        {{ item.title }}
+      </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (isHandset$ | async) {
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      }
+      <span>angular-material-3</span>
+    </mat-toolbar>
+    <div class="sidenav-scroll-wrapper">
+      <div class="sidenav-content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
