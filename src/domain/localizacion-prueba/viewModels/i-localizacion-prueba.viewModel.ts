@@ -8,8 +8,8 @@
 * @subpackage Domain
 */
 
-import { IAuditoriaModel } from 'src/data/general/models/i-auditoria.model';
-import { IResponseStatusViewModel } from 'src/domain/general/viewModels/i-response-status.viewModel';
+import { IAuditoria } from '../../../data/base/interfaces/i-auditoria';
+import { IResponseStatusViewModel } from '../../base/viewModels/i-response-status.viewModel';
 
 
 /**
@@ -26,7 +26,7 @@ export interface ISaveLocalizacionPruebaFromRsViewModel extends IResponseStatusV
 * @name ISaveLocalizacionPruebaRsViewModel
 */
 export interface ISaveLocalizacionPruebaRsViewModel {
-	id_localizacion_prueba: number | null;
+	idLocalizacionPrueba: number | null;
 }
 
 /**
@@ -34,14 +34,14 @@ export interface ISaveLocalizacionPruebaRsViewModel {
 * Extiende IAuditoriaModel
 * @name ISaveLocalizacionPruebaViewModel
 */
-export interface ISaveLocalizacionPruebaViewModel extends IAuditoriaModel {
-	nombre_localizacion_prueba?: string | null;
-	is_localizacion_prueba?: boolean | null;
-	entero_localizacion_prueba?: number | null;
-	decimal_localizacion_prueba?: number | null;
-	descripcion_localizacion_prueba?: string | null;
-	fecha_localizacion_prueba?: Date | null;
-	estado_localizacion_prueba?: number | null;
+export interface ISaveLocalizacionPruebaViewModel extends IAuditoria {
+	nombreLocalizacionPrueba?: string | null;
+	isLocalizacionPrueba?: boolean | null;
+	enteroLocalizacionPrueba?: number | null;
+	decimalLocalizacionPrueba?: number | null;
+	descripcionLocalizacionPrueba?: string | null;
+	fechaLocalizacionPrueba?: Date | null;
+	estadoLocalizacionPrueba?: number | null;
 }
 
 /**
@@ -58,14 +58,14 @@ export interface IGetLocalizacionPruebaFromRsViewModel extends IResponseStatusVi
 * @name IGetLocalizacionPruebaRsViewModel
 */
 export interface IGetLocalizacionPruebaRsViewModel {
-	id_localizacion_prueba?: number | null;
-	nombre_localizacion_prueba?: string | null;
-	is_localizacion_prueba?: boolean | null;
-	entero_localizacion_prueba?: number | null;
-	decimal_localizacion_prueba?: number | null;
-	descripcion_localizacion_prueba?: string | null;
-	fecha_localizacion_prueba?: Date | null;
-	estado_localizacion_prueba?: number | null;
+	idLocalizacionPrueba?: number | null;
+	nombreLocalizacionPrueba?: string | null;
+	isLocalizacionPrueba?: boolean | null;
+	enteroLocalizacionPrueba?: number | null;
+	decimalLocalizacionPrueba?: number | null;
+	descripcionLocalizacionPrueba?: string | null;
+	fechaLocalizacionPrueba?: Date | null;
+	estadoLocalizacionPrueba?: number | null;
 }
 
 /**
@@ -92,14 +92,14 @@ export interface IGetLocalizacionPruebaPaginadoFromRsViewModel extends IResponse
 * @name IGetLocalizacionPruebaPaginadoRsViewModel
 */
 export interface IGetLocalizacionPruebaPaginadoRsViewModel {
-	id_localizacion_prueba?: number | null;
-	nombre_localizacion_prueba?: string | null;
-	is_localizacion_prueba?: boolean | null;
-	entero_localizacion_prueba?: number | null;
-	decimal_localizacion_prueba?: number | null;
-	descripcion_localizacion_prueba?: string | null;
-	fecha_localizacion_prueba?: Date | null;
-	estado_localizacion_prueba?: number | null;
+	idLocalizacionPrueba?: number | null;
+	nombreLocalizacionPrueba?: string | null;
+	isLocalizacionPrueba?: boolean | null;
+	enteroLocalizacionPrueba?: number | null;
+	decimalLocalizacionPrueba?: number | null;
+	descripcionLocalizacionPrueba?: string | null;
+	fechaLocalizacionPrueba?: Date | null;
+	estadoLocalizacionPrueba?: number | null;
 }
 
 /**
@@ -128,14 +128,14 @@ export interface IGetLocalizacionPruebaByIdFromRsViewModel extends IResponseStat
 * @name IGetLocalizacionPruebaByIdRsViewModel
 */
 export interface IGetLocalizacionPruebaByIdRsViewModel {
-	id_localizacion_prueba?: number | null;
-	nombre_localizacion_prueba?: string | null;
-	is_localizacion_prueba?: boolean | null;
-	entero_localizacion_prueba?: number | null;
-	decimal_localizacion_prueba?: number | null;
-	descripcion_localizacion_prueba?: string | null;
-	fecha_localizacion_prueba?: Date | null;
-	estado_localizacion_prueba?: number | null;
+	idLocalizacionPrueba?: number | null;
+	nombreLocalizacionPrueba?: string | null;
+	isLocalizacionPrueba?: boolean | null;
+	enteroLocalizacionPrueba?: number | null;
+	decimalLocalizacionPrueba?: number | null;
+	descripcionLocalizacionPrueba?: string | null;
+	fechaLocalizacionPrueba?: Date | null;
+	estadoLocalizacionPrueba?: number | null;
 }
 
 /**
@@ -144,7 +144,7 @@ export interface IGetLocalizacionPruebaByIdRsViewModel {
 * @name IGetLocalizacionPruebaByIdViewModel
 */
 export interface IGetLocalizacionPruebaByIdViewModel {
-	id_localizacion_prueba: number | null;
+	idLocalizacionPrueba: number | null;
 }
 
 /**
@@ -161,7 +161,7 @@ export interface IUpdateLocalizacionPruebaFromRsViewModel extends IResponseStatu
 * @name IUpdateLocalizacionPruebaRsViewModel
 */
 export interface IUpdateLocalizacionPruebaRsViewModel {
-	id_localizacion_prueba: number | null;
+	idLocalizacionPrueba: number | null;
 }
 
 /**
@@ -169,13 +169,13 @@ export interface IUpdateLocalizacionPruebaRsViewModel {
 * Extiende IAuditoriaModel
 * @name IUpdateLocalizacionPruebaViewModel
 */
-export interface IUpdateLocalizacionPruebaViewModel extends IAuditoriaModel {
-	id_localizacion_prueba?: number | null;
-	nombre_localizacion_prueba?: string | null;
-	is_localizacion_prueba?: boolean | null;
-	entero_localizacion_prueba?: number | null;
-	decimal_localizacion_prueba?: number | null;
-	descripcion_localizacion_prueba?: string | null;
-	fecha_localizacion_prueba?: Date | null;
-	estado_localizacion_prueba?: number | null;
+export interface IUpdateLocalizacionPruebaViewModel extends IAuditoria{
+	idLocalizacionPrueba?: number | null;
+	nombreLocalizacionPrueba?: string | null;
+	isLocalizacionPrueba?: boolean | null;
+	enteroLocalizacionPrueba?: number | null;
+	decimalLocalizacionPrueba?: number | null;
+	descripcionLocalizacionPrueba?: string | null;
+	fechaLocalizacionPrueba?: Date | null;
+	estadoLocalizacionPrueba?: number | null;
 }

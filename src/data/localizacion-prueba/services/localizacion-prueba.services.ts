@@ -12,9 +12,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
-import { StatusResponseService } from 'src/data/base/status-response.service';
-import { IGetLocalizacionPruebaByIdFromRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaPaginadoFromRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, IGetLocalizacionPruebaViewModel, ISaveLocalizacionPruebaFromRsViewModel, ISaveLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaFromRsViewModel, IUpdateLocalizacionPruebaViewModel } from 'src/domain/localizacion-prueba/viewModels/i-localizacion-prueba.viewModel';
 import { environment } from '../../../environments/environment';
+import { StatusResponseService } from '../../base/services/status-response.service';
+import { IGetLocalizacionPruebaByIdFromRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaPaginadoFromRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, IGetLocalizacionPruebaViewModel, ISaveLocalizacionPruebaFromRsViewModel, ISaveLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaFromRsViewModel, IUpdateLocalizacionPruebaViewModel } from '../../../domain/localizacion-prueba/viewModels/i-localizacion-prueba.viewModel';
 
 const apiUrl: string = environment.apiUrl;
 
@@ -40,7 +40,7 @@ export class LocalizacionPruebaService  {
 	*/
 	public async saveLocalizacionPrueba(localizacionPrueba: ISaveLocalizacionPruebaViewModel): Promise<Observable<ISaveLocalizacionPruebaFromRsViewModel>>{
 	localizacionPrueba.auditoria = 'transaccionAuditoria';
-	const url = `${apiUrl}LocalizacionPrueba/SaveLocalizacionPrueba`;
+	const url = `${apiUrl}command/localizacion-prueba/saveLocalizacionPrueba`;
 	return this._http.post<any>(url, localizacionPrueba).pipe(
 		map((result) => {
 		return result;
