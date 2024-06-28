@@ -1,65 +1,4 @@
-<!-- <div class="container mt-5">
-  <form [formGroup]="form" (ngSubmit)="guardar()" class="form-container">
-    <div class="card">
-      <div class="card-header card-header-custom">
-        <span>Username</span>
-      </div>
-      <div class="card-body card-body-custom">
-
-
-        <mat-form-field appearance="outline"  class="full-width">
-          <mat-label>ID de Localización</mat-label>
-          <input matInput formControlName="idLocalizacionPrueba">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Estado de Localización</mat-label>
-          <input matInput formControlName="estadoLocalizacionPrueba">
-
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Nombre de Localización</mat-label>
-          <input matInput formControlName="nombreLocalizacionPrueba">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Fecha de Localización</mat-label>
-          <input matInput type="datetime-local" formControlName="fechaLocalizacionPrueba">
-        </mat-form-field>
-
-        <mat-checkbox formControlName="isLocalizacionPrueba" class="full-width">¿Activo?</mat-checkbox>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Valor Entero</mat-label>
-          <input matInput formControlName="enteroLocalizacionPrueba">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Valor Decimal</mat-label>
-          <input matInput formControlName="decimalLocalizacionPrueba">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Descripción</mat-label>
-          <textarea matInput formControlName="descripcionLocalizacionPrueba"></textarea>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Estado</mat-label>
-          <input matInput formControlName="estadoLocalizacion">
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit" class="full-width">Guardar</button>
-      </div>
-    </div>
-
-  </form>
-</div> -->
-
-
 <div class="container mt-5">
-
   <form [formGroup]="formLocalizacionPrueba" (ngSubmit)="guardar()">
     <div class="card card-custom">
       <div class="card-header card-header-custom">
@@ -86,22 +25,14 @@
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
-            <!-- <label for="isLocalizacionPrueba">Is Localizacion</label> -->
             <label class="form-check-label" for="isLocalizacionPrueba">Estado {{checkedIsLocalizacionPrueba}}</label>
-
             <div class="form-check form-switch form-switch-md">
               <input type="checkbox" id="isLocalizacionPrueba" class="form-check-input"
                 [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)}"
                 formControlName="isLocalizacionPrueba" (click)="onChangeIsLocalizacionPrueba($event)"
                 [appTooltip]="_utilsService.getFieldErrorRequired('isLocalizacionPrueba',formLocalizacionPrueba)"
                 [isTooltipEnabled]="_utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)">
-
             </div>
-            <!-- <input type="checkbox" id="isLocalizacionPrueba" class="form-check-input"
-              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)}"
-              formControlName="isLocalizacionPrueba"
-              [appTooltip]="_utilsService.getFieldErrorRequired('isLocalizacionPrueba',formLocalizacionPrueba)"
-              [isTooltipEnabled]="_utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)"> -->
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
@@ -141,18 +72,10 @@
               <option value="1">Activo</option>
               <option value="0">Inactivo</option>
             </select>
-            <!-- <input type="text" id="estadoLocalizacionPrueba" class="form-control"
-              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)}"
-              formControlName="estadoLocalizacionPrueba"
-              [appTooltip]="_utilsService.getFieldErrorRequired('estadoLocalizacionPrueba',formLocalizacionPrueba)"
-              [isTooltipEnabled]="_utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)"> -->
           </div>
         </div>
 
-        <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
-
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-          <!-- <button class="btn btn-primary me-md-2" type="button">Button</button> -->
           <button class="btn btn-primary" type="submit"><i class="fa fa-save me-2"></i>Guardar </button>
         </div>
       </div>
