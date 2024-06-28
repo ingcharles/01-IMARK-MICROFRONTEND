@@ -1,5 +1,6 @@
 // // Custom Theming for Angular Material
 // // For more information: https://material.angular.io/guide/theming
+@use "sass:math";
 // @use '@angular/material' as mat;
 // @include mat.core();
 
@@ -125,7 +126,11 @@
   --bs-body-font-size: 12px;
 
   .form-control {
-    font-size: 12px;
+    font-size: 14px;
+  }
+
+  .form-select {
+    font-size: 14px;
   }
 
   h6,
@@ -143,6 +148,72 @@
     margin-top: 0;
     margin-bottom: 0
   }
+
+  @mixin switch($res: 'sm') {
+    $index: 1rem;
+    $mainVal: 1rem;
+
+    @if $res == 'md' {
+        $index: 2rem;
+        $mainVal: 1.5rem;
+    } @else if $res == 'lg' {
+        $index: 3rem;
+        $mainVal: 2rem;
+    } @else if $res == 'xl' {
+        $index: 4rem;
+        $mainVal: 2.5rem;
+    }
+
+    margin-bottom: math.div($index, 2) ; /* JUST FOR STYLING PURPOSE */
+
+    .form-check-input {
+        height: $mainVal;
+        width: math.div($index, 1) + 1.2rem; //calc(#{$index} + 1.2rem);
+        border-radius: $mainVal * 2;
+    }
+}
+
+.form-check-input {
+  clear: left;
+}
+
+.form-control:not(:invalid):not(.is-invalid):focus,.form-select:not(:invalid):not(.is-invalid):focus {
+  //color: var(--bs-body-color);
+  //background-color: var(--bs-body-bg);
+  //border-color: #86b7fe;
+  //border: 0px solid transparent;
+  border-color: #005cbb;
+  //border-bottom: 1px solid #005cbb;
+  //outline: 0;
+  box-shadow: none;
+}
+
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus,.was-validated .form-select:invalid:focus, .form-select.is-invalid:focus {
+  //border-color: var(--bs-form-invalid-border-color);
+  box-shadow: 0 0 0 0.18rem rgba(220, 53, 69, 0.25);
+ // border-color:1px solid #dc3545
+ //box-shadow: none;
+}
+// YOU CAN PUT ALL RESOLUTION HERE
+// sm - DEFAULT, md, lg, xl
+
+.form-switch.form-switch-sm {
+    @include switch();
+}
+
+.form-switch.form-switch-md {
+    @include switch('md');
+}
+
+.form-switch.form-switch-lg {
+    @include switch('lg');
+}
+
+.form-switch.form-switch-xl {
+    @include switch('xl');
+}
+
+
 
   .dark {
 

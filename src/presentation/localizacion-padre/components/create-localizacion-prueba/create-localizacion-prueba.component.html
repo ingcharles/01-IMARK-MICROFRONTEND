@@ -89,7 +89,7 @@
             <!-- <label for="isLocalizacionPrueba">Is Localizacion</label> -->
             <label class="form-check-label" for="isLocalizacionPrueba">Estado {{checkedIsLocalizacionPrueba}}</label>
 
-            <div class="form-check form-switch">
+            <div class="form-check form-switch form-switch-md">
               <input type="checkbox" id="isLocalizacionPrueba" class="form-check-input"
                 [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)}"
                 formControlName="isLocalizacionPrueba" (click)="onChangeIsLocalizacionPrueba($event)"
@@ -133,7 +133,7 @@
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
             <label for="estadoLocalizacionPrueba">Estado Localizacion</label>
-            <select id="estadoLocalizacionPrueba" class="form-select form-select-sm"
+               <select id="estadoLocalizacionPrueba" class="form-select"
               [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)}"
               formControlName="estadoLocalizacionPrueba"
               [appTooltip]="_utilsService.getFieldErrorRequired('estadoLocalizacionPrueba',formLocalizacionPrueba)"
