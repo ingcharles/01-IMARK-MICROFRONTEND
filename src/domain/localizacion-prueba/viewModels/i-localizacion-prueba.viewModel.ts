@@ -107,12 +107,14 @@ export interface IGetLocalizacionPruebaPaginadoRsViewModel {
 * @name IGetLocalizacionPruebaPaginadoViewModel
 */
 export interface IGetLocalizacionPruebaPaginadoViewModel {
-	busqueda?: string | null;
-	campo_orden?: string | null;
-	orden?: string | null;
-	indice_inicio?: number | null;
-	cantidad_registro?: number | null;
+	page: number;
+	//campo_orden?: string | null;
+	//orden?: string | null;
+	size: number;
+	search: string;
 }
+
+
 
 /**
 * Interface que contiene los datos de entrada que viene del servicio

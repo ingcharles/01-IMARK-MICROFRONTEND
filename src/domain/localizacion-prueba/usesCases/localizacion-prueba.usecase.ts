@@ -8,11 +8,12 @@
 * @subpackage Domain
 */
 
-import { Observable } from 'rxjs';
 import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { ISaveLocalizacionPruebaViewModel, ISaveLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaViewModel, IGetLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, IGetLocalizacionPruebaPaginadoFromRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaByIdFromRsViewModel, IUpdateLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaFromRsViewModel  } from '../viewModels/i-localizacion-prueba.viewModel';
+import { IPage } from '../../../data/base/interfaces/i-page';
 import { LocalizacionPruebaService } from '../../../data/localizacion-prueba/services/localizacion-prueba.services';
+import { IGetLocalizacionPruebaByIdFromRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaPaginadoFromRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, IGetLocalizacionPruebaViewModel, ISaveLocalizacionPruebaFromRsViewModel, ISaveLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaFromRsViewModel, IUpdateLocalizacionPruebaViewModel } from '../viewModels/i-localizacion-prueba.viewModel';
 
 
 @Injectable({
@@ -53,7 +54,7 @@ export class LocalizacionPruebaUseCase {
 	* @param localizacionPrueba: IGetLocalizacionPruebaPaginadoViewModel
 	* @return Promise<Observable<IGetLocalizacionPruebaPaginadoFromRsViewModel>>
 	*/
-	public async getLocalizacionPruebaPaginado(localizacionPrueba: IGetLocalizacionPruebaPaginadoViewModel): Promise<Observable<IGetLocalizacionPruebaPaginadoFromRsViewModel>> {
+	public async getLocalizacionPruebaPaginado(localizacionPrueba: IGetLocalizacionPruebaPaginadoViewModel): Promise<Observable<IPage<IGetLocalizacionPruebaPaginadoFromRsViewModel>>> {
 	return await this._localizacionPruebaService.getLocalizacionPruebaPaginado(localizacionPrueba);
 	}
 	/**

@@ -12,9 +12,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { StatusResponseService } from '../../base/services/status-response.service';
 import { IGetLocalizacionPruebaByIdFromRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaPaginadoFromRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, IGetLocalizacionPruebaViewModel, ISaveLocalizacionPruebaFromRsViewModel, ISaveLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaFromRsViewModel, IUpdateLocalizacionPruebaViewModel } from '../../../domain/localizacion-prueba/viewModels/i-localizacion-prueba.viewModel';
+import { environment } from '../../../environments/environment';
+import { IPage } from '../../base/interfaces/i-page';
+import { StatusResponseService } from '../../base/services/status-response.service';
 
 const apiUrl: string = environment.apiUrl;
 
@@ -73,14 +74,15 @@ export class LocalizacionPruebaService  {
 	* @param busqueda: IGetLocalizacionPruebaPaginadoViewModel
 	* @return Promise<Observable<IGetLocalizacionPruebaPaginadoFromRsViewModel>>
 	*/
-	public async getLocalizacionPruebaPaginado(dataViewModel: IGetLocalizacionPruebaPaginadoViewModel): Promise<Observable<IGetLocalizacionPruebaPaginadoFromRsViewModel>>{
-	const url = `${apiUrl}LocalizacionPrueba/GetLocalizacionPruebaPaginado`;
-	return this._http.post<any>(url, dataViewModel).pipe(
+	public async getLocalizacionPruebaPaginado(dataViewModel: IGetLocalizacionPruebaPaginadoViewModel): Promise<Observable<IPage<IGetLocalizacionPruebaPaginadoFromRsViewModel>>>{
+
+    const url = `${apiUrl}query/localizacion-prueba/findAllPaginateLocalizacionPrueba`;
+	return this._http.post<IPage<IGetLocalizacionPruebaPaginadoFromRsViewModel>>(url, dataViewModel).pipe(
 		map((result) => {
 		return result;
 		}),
 		catchError((error) => {
-		return of(this._statusResponseService.error(error));
+		return of();
 		})
 	);
 	}

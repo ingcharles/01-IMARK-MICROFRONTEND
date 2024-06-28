@@ -138,8 +138,8 @@
               formControlName="estadoLocalizacionPrueba"
               [appTooltip]="_utilsService.getFieldErrorRequired('estadoLocalizacionPrueba',formLocalizacionPrueba)"
               [isTooltipEnabled]="_utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)">
-              <option value="Activo">Activo</option>
-              <option value="Inactivo">Inactivo</option>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
             </select>
             <!-- <input type="text" id="estadoLocalizacionPrueba" class="form-control"
               [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)}"
@@ -153,7 +153,7 @@
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
           <!-- <button class="btn btn-primary me-md-2" type="button">Button</button> -->
-          <button class="btn btn-primary" type="submit">Guardar</button>
+          <button class="btn btn-primary" type="submit"><i class="fa fa-save me-2"></i>Guardar </button>
         </div>
       </div>
     </div>

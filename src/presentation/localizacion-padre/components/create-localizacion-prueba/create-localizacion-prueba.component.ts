@@ -1,47 +1,42 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { Component, Input, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { messages } from '../../../../data/base/constants/messages';
 import { TooltipDirective } from '../../../../data/base/directives/tooltip-directive';
+import { AlertsService } from '../../../../data/base/services/alerts.service';
+import { LoaderService } from '../../../../data/base/services/loader.service';
 import { UtilService } from '../../../../data/base/services/utils.service';
 import { LocalizacionPruebaUseCase } from '../../../../domain/localizacion-prueba/usesCases/localizacion-prueba.usecase';
 import { ISaveLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaViewModel } from '../../../../domain/localizacion-prueba/viewModels/i-localizacion-prueba.viewModel';
-import { LoaderService } from '../../../../data/base/services/loader.service';
-import { AlertsService } from '../../../../data/base/services/alerts.service';
-import { messages } from '../../../../data/base/constants/messages';
 
 // declare var bootstrap: any;
 @Component({
   selector: 'app-create-localizacion-prueba',
+  templateUrl: './create-localizacion-prueba.component.html',
+  styleUrl: './create-localizacion-prueba.component.scss',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    // MatButtonModule,
-    // MatFormFieldModule,
-    // MatInputModule,
-    // MatCheckboxModule,
-    // MatDatepickerModule,
-    // MatNativeDateModule,
-    // MatGridListModule,
-    // HttpClientModule,
     TooltipDirective,
   ],
   providers: [],
-  templateUrl: './create-localizacion-prueba.component.html',
-  styleUrl: './create-localizacion-prueba.component.scss'
 })
 
 export class CreateLocalizacionPruebaComponent implements OnInit {
 
   constructor() { }
 
-  _platformId: Object = inject(PLATFORM_ID);
   _fb: FormBuilder = inject(FormBuilder);
-  _loaderService: LoaderService = inject(LoaderService);
+  _platformId: Object = inject(PLATFORM_ID);
   _utilsService: UtilService = inject(UtilService);
+  _loaderService: LoaderService = inject(LoaderService);
   _alertsService: AlertsService = inject(AlertsService);
-  _LocalizacionPruebaUseCase: LocalizacionPruebaUseCase = inject(LocalizacionPruebaUseCase);
+  _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  _localizacionPruebaUseCase: LocalizacionPruebaUseCase = inject(LocalizacionPruebaUseCase);
 
+  @Input()
   formLocalizacionPrueba!: FormGroup;
   public checkedIsLocalizacionPrueba: boolean = false;
 
@@ -74,7 +69,7 @@ export class CreateLocalizacionPruebaComponent implements OnInit {
 
     if (this.currentLocalizacionPrueba.idLocalizacionPrueba) {
       this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmUpdate, () => {
-        this._LocalizacionPruebaUseCase.updateLocalizacionPrueba(this.currentLocalizacionPrueba as IUpdateLocalizacionPruebaViewModel).then(obs => {
+        this._localizacionPruebaUseCase.updateLocalizacionPrueba(this.currentLocalizacionPrueba as IUpdateLocalizacionPruebaViewModel).then(obs => {
           this._loaderService.display(true);
           obs.subscribe((result) => {
             this._loaderService.display(false);
@@ -91,7 +86,7 @@ export class CreateLocalizacionPruebaComponent implements OnInit {
     };
 
     this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmSave, () => {
-      this._LocalizacionPruebaUseCase.saveLocalizacionPrueba(this.currentLocalizacionPrueba as ISaveLocalizacionPruebaViewModel).then(obs => {
+      this._localizacionPruebaUseCase.saveLocalizacionPrueba(this.currentLocalizacionPrueba as ISaveLocalizacionPruebaViewModel).then(obs => {
         this._loaderService.display(true);
         obs.subscribe((result) => {
           this._loaderService.display(false);

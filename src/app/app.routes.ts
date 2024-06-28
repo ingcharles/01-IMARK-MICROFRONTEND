@@ -12,4 +12,12 @@ export const routes: Routes = [
       ),
       title: 'Dashboard'
   },
+  {
+    path: 'index-localizacion-prueba',
+    loadComponent: () =>
+      import('../presentation/localizacion-padre/components/index-localizacion-prueba/index-localizacion-prueba.component').then(
+        (c) => c.IndexLocalizacionPruebaComponent
+      ),
+      title: 'Dashboard'
+  },
 ];
