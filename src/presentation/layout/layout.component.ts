@@ -7,7 +7,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ThemeService } from '../../data/base/services/theme.service';
+import { ThemeService } from '../../data/base/services/themes.service';
 
 @Component({
   selector: 'app-layout',

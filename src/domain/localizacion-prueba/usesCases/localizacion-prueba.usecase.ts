@@ -9,7 +9,7 @@
 */
 
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { ISaveLocalizacionPruebaViewModel, ISaveLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaViewModel, IGetLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, IGetLocalizacionPruebaPaginadoFromRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaByIdFromRsViewModel, IUpdateLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaFromRsViewModel  } from '../viewModels/i-localizacion-prueba.viewModel';
 import { LocalizacionPruebaService } from '../../../data/localizacion-prueba/services/localizacion-prueba.services';
@@ -26,9 +26,11 @@ export class LocalizacionPruebaUseCase {
 	* @param _localizacionPruebaService: LocalizacionPruebaService
 	* @return Promise<Observable<ISaveLocalizacionPruebaFromRsViewModel>>
 	 */
-	constructor(private _localizacionPruebaService: LocalizacionPruebaService)
+	constructor()
 	{
 	}
+  // private _localizacionPruebaService: LocalizacionPruebaService
+  _localizacionPruebaService: LocalizacionPruebaService = inject(LocalizacionPruebaService);
 
 	/**
 	* Guarda el registro actual

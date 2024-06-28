@@ -1,5 +1,6 @@
 import { SweetAlertIcon } from "sweetalert2";
 export const isWarning: SweetAlertIcon = 'warning';
+export const isInfo: SweetAlertIcon = 'info';
 export const isSuccess: SweetAlertIcon = 'success';
 export const isError: SweetAlertIcon = 'error';
 let date: Date = new Date();
@@ -17,9 +18,10 @@ export const messages = {
   dniValid: "Ingrese una cédula o ruc válido",
   aportanteNoExist: "Aportante no registrado, por favor registrelo",
   camposVacios: "Debe completar todos los campos",
-  advertenciaTitle: "¡Advertencia!",
-  exitoTitle: "¡Éxito!",
-  confirmacionTitle: "Confirmación",
+  warningTitle: "¡Advertencia!",
+  informativeTitle: "¡Informativo!",
+  successTitle: "¡Éxito!",
+  confirmationTitle: "¡Confirmación!",
   documentosRespaldosVacios: "Cargue los documentos de respaldo",
   documentoExcelVacio: "Registre de afiliados o adherentes",
   registrosGastoActivoFijoVacio: "Registre los de gastos o activos fijos",
@@ -36,6 +38,7 @@ export const messages = {
   serviceFail: "Servicio no disponible",
   isWarning: isWarning,
   isSuccess: isSuccess,
+  isInfo: isInfo,
   isError: isError,
 
   proceso: 'Electoral',

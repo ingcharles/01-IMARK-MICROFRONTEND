@@ -60,75 +60,94 @@
 
 <div class="container mt-5">
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
+  <form [formGroup]="formLocalizacionPrueba" (ngSubmit)="guardar()">
     <div class="card card-custom">
       <div class="card-header card-header-custom">
         <h4>Formulario Localización Prueba</h4>
       </div>
       <div class="card-body card-body-custom">
         <div class="row">
-                 <!-- [attr.title]="_utilService.isFieldInvalid('idLocalizacionPrueba') ? _utilService.getFieldError('idLocalizacionPrueba') : null" -->
-          <!-- [attr.data-bs-toggle]="_utilService.isFieldInvalid('idLocalizacionPrueba') ? 'tooltip' : null" -->
-          <!-- data-bs-toggle="tooltip"  -->
-
-
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
             <label for="nombreLocalizacionPrueba">Nombre</label>
             <input type="text" id="nombreLocalizacionPrueba" class="form-control"
-              [ngClass]="{'is-invalid': _utilService.isFieldInvalid('nombreLocalizacionPrueba',form)}"
-              formControlName="nombreLocalizacionPrueba" [appTooltip]="_utilService.getFieldError('nombreLocalizacionPrueba',form)"
-              [isTooltipEnabled]="_utilService.isFieldInvalid('nombreLocalizacionPrueba',form)">
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('nombreLocalizacionPrueba',formLocalizacionPrueba)}"
+              formControlName="nombreLocalizacionPrueba"
+              [appTooltip]="_utilsService.getFieldErrorRequired('nombreLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('nombreLocalizacionPrueba',formLocalizacionPrueba)">
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
             <label for="fechaLocalizacionPrueba">Fecha</label>
             <input type="date" id="fechaLocalizacionPrueba" class="form-control"
-              [ngClass]="{'is-invalid': _utilService.isFieldInvalid('fechaLocalizacionPrueba',form)}"
-              formControlName="fechaLocalizacionPrueba" [appTooltip]="_utilService.getFieldError('fechaLocalizacionPrueba',form)"
-              [isTooltipEnabled]="_utilService.isFieldInvalid('fechaLocalizacionPrueba',form)">
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('fechaLocalizacionPrueba',formLocalizacionPrueba)}"
+              formControlName="fechaLocalizacionPrueba"
+              [appTooltip]="_utilsService.getFieldErrorRequired('fechaLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('fechaLocalizacionPrueba',formLocalizacionPrueba)">
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
-            <label for="isLocalizacionPrueba">Is Localizacion</label>
-            <input type="checkbox" id="isLocalizacionPrueba" class="form-check-input"
-              [ngClass]="{'is-invalid': _utilService.isFieldInvalid('isLocalizacionPrueba',form)}" formControlName="isLocalizacionPrueba"
-              [appTooltip]="_utilService.getFieldError('isLocalizacionPrueba',form)"
-              [isTooltipEnabled]="_utilService.isFieldInvalid('isLocalizacionPrueba',form)">
+            <!-- <label for="isLocalizacionPrueba">Is Localizacion</label> -->
+            <label class="form-check-label" for="isLocalizacionPrueba">Estado {{checkedIsLocalizacionPrueba}}</label>
+
+            <div class="form-check form-switch">
+              <input type="checkbox" id="isLocalizacionPrueba" class="form-check-input"
+                [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)}"
+                formControlName="isLocalizacionPrueba" (click)="onChangeIsLocalizacionPrueba($event)"
+                [appTooltip]="_utilsService.getFieldErrorRequired('isLocalizacionPrueba',formLocalizacionPrueba)"
+                [isTooltipEnabled]="_utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)">
+
+            </div>
+            <!-- <input type="checkbox" id="isLocalizacionPrueba" class="form-check-input"
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)}"
+              formControlName="isLocalizacionPrueba"
+              [appTooltip]="_utilsService.getFieldErrorRequired('isLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)"> -->
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
             <label for="enteroLocalizacionPrueba">Entero</label>
             <input type="number" id="enteroLocalizacionPrueba" class="form-control"
-              [ngClass]="{'is-invalid': _utilService.isFieldInvalid('enteroLocalizacionPrueba',form)}"
-              formControlName="enteroLocalizacionPrueba" [appTooltip]="_utilService.getFieldError('enteroLocalizacionPrueba',form)"
-              [isTooltipEnabled]="_utilService.isFieldInvalid('enteroLocalizacionPrueba',form)">
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('enteroLocalizacionPrueba',formLocalizacionPrueba)}"
+              formControlName="enteroLocalizacionPrueba"
+              [appTooltip]="_utilsService.getFieldErrorRequired('enteroLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('enteroLocalizacionPrueba',formLocalizacionPrueba)">
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
             <label for="decimalLocalizacionPrueba">Decimal</label>
             <input type="number" step="0.01" id="decimalLocalizacionPrueba" class="form-control"
-              [ngClass]="{'is-invalid': _utilService.isFieldInvalid('decimalLocalizacionPrueba',form)}"
-              formControlName="decimalLocalizacionPrueba" [appTooltip]="_utilService.getFieldError('decimalLocalizacionPrueba',form)"
-              [isTooltipEnabled]="_utilService.isFieldInvalid('decimalLocalizacionPrueba',form)">
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('decimalLocalizacionPrueba',formLocalizacionPrueba)}"
+              formControlName="decimalLocalizacionPrueba"
+              [appTooltip]="_utilsService.getFieldErrorRequired('decimalLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('decimalLocalizacionPrueba',formLocalizacionPrueba)">
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
             <label for="descripcionLocalizacionPrueba">Descripción</label>
             <input type="text" id="descripcionLocalizacionPrueba" class="form-control"
-              [ngClass]="{'is-invalid': _utilService.isFieldInvalid('descripcionLocalizacionPrueba',form)}"
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('descripcionLocalizacionPrueba',formLocalizacionPrueba)}"
               formControlName="descripcionLocalizacionPrueba"
-              [appTooltip]="_utilService.getFieldError('descripcionLocalizacionPrueba',form)"
-              [isTooltipEnabled]="_utilService.isFieldInvalid('descripcionLocalizacionPrueba',form)">
+              [appTooltip]="_utilsService.getFieldErrorRequired('descripcionLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('descripcionLocalizacionPrueba',formLocalizacionPrueba)">
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
             <label for="estadoLocalizacionPrueba">Estado Localizacion</label>
-            <input type="text" id="estadoLocalizacionPrueba" class="form-control"
-              [ngClass]="{'is-invalid': _utilService.isFieldInvalid('estadoLocalizacionPrueba',form)}"
-              formControlName="estadoLocalizacionPrueba" [appTooltip]="_utilService.getFieldError('estadoLocalizacionPrueba',form)"
-              [isTooltipEnabled]="_utilService.isFieldInvalid('estadoLocalizacionPrueba',form)">
+            <select id="estadoLocalizacionPrueba" class="form-select form-select-sm"
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)}"
+              formControlName="estadoLocalizacionPrueba"
+              [appTooltip]="_utilsService.getFieldErrorRequired('estadoLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)">
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+            <!-- <input type="text" id="estadoLocalizacionPrueba" class="form-control"
+              [ngClass]="{'is-invalid': _utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)}"
+              formControlName="estadoLocalizacionPrueba"
+              [appTooltip]="_utilsService.getFieldErrorRequired('estadoLocalizacionPrueba',formLocalizacionPrueba)"
+              [isTooltipEnabled]="_utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)"> -->
           </div>
-          </div>
+        </div>
 
         <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
 

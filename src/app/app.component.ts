@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ThemeService } from '../data/base/services/theme.service';
+import { ThemeService } from '../data/base/services/themes.service';
 import { LayoutComponent } from '../presentation/layout/layout.component';
 
 @Component({

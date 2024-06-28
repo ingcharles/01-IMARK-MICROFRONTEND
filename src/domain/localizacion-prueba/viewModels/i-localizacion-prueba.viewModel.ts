@@ -8,7 +8,7 @@
 * @subpackage Domain
 */
 
-import { IAuditoria } from '../../../data/base/interfaces/i-auditoria';
+import { IAuditoriaViewModel } from '../../base/viewModels/i-auditoriaViewModel';
 import { IResponseStatusViewModel } from '../../base/viewModels/i-response-status.viewModel';
 
 
@@ -34,7 +34,7 @@ export interface ISaveLocalizacionPruebaRsViewModel {
 * Extiende IAuditoriaModel
 * @name ISaveLocalizacionPruebaViewModel
 */
-export interface ISaveLocalizacionPruebaViewModel extends IAuditoria {
+export interface ISaveLocalizacionPruebaViewModel extends IAuditoriaViewModel {
 	nombreLocalizacionPrueba?: string | null;
 	isLocalizacionPrueba?: boolean | null;
 	enteroLocalizacionPrueba?: number | null;
@@ -169,7 +169,7 @@ export interface IUpdateLocalizacionPruebaRsViewModel {
 * Extiende IAuditoriaModel
 * @name IUpdateLocalizacionPruebaViewModel
 */
-export interface IUpdateLocalizacionPruebaViewModel extends IAuditoria{
+export interface IUpdateLocalizacionPruebaViewModel extends IAuditoriaViewModel{
 	idLocalizacionPrueba?: number | null;
 	nombreLocalizacionPrueba?: string | null;
 	isLocalizacionPrueba?: boolean | null;
