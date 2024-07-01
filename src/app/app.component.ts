@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from '../data/base/services/themes.service';
 import { LayoutComponent } from '../presentation/layout/layout.component';
@@ -14,4 +14,10 @@ import { LayoutComponent } from '../presentation/layout/layout.component';
 export class AppComponent {
   title = '01-IMARK-MICROFRONTEND';
   themeService: ThemeService = inject(ThemeService);
+
+  constructor(private ref: ChangeDetectorRef){}
+  ngAfterContentChecked(): void {
+    this.ref.detectChanges();
+  }
+
 }

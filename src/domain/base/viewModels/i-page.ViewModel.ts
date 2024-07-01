@@ -1,4 +1,4 @@
-export interface IPage<T> {
+export interface IPageViewModel<T> {
   content: T[];
   pageable: {
       pageNumber: number;

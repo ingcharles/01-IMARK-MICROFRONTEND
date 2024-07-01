@@ -35,19 +35,15 @@ export const messages = {
   TypeFilenNotAllowed: "Tipo de archivo no está permitido",
   exceed5MBFile: "Tamaño supera los 5MB",
   confirmAnular: "¿Está seguro de anular el registro?",
-  serviceFail: "Servicio no disponible",
+  serviceFail: "Acceso denegado al servicio",
+  serviceNotFound: "Servicio no disponible",
   isWarning: isWarning,
   isSuccess: isSuccess,
   isInfo: isInfo,
   isError: isError,
 
-  proceso: 'Electoral',
-  codProceso: 999,
-  dignidad: 'Alcalde',
-  candidato: 'Lista 6',
-  codUsuario: 888,
-  usuario: 'Pepito Perez',
-  rolUsuario: 'RME',
-  fecha: date.toLocaleString()
+  successSave: 'registro guardado exitosamente',
+  successUpdate: 'registro actualizado exitosamente',
+
 
 }

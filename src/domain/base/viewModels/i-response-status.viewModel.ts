@@ -1,12 +1,9 @@
 
-export interface IResponseStatusViewModel{
-  message: string;
-  statusCode: number | null;
-  ok: boolean | null;
-}
 
-export interface IResponseStatusErrorViewModel{
-  message: string ;
+
+export interface IResponseStatusViewModel<T>{
+  data?: T | null,
+  message: string;
   statusCode: number | null;
   ok: boolean | null;
 }

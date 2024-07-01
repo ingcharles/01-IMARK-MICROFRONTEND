@@ -11,9 +11,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { IPage } from '../../../data/base/interfaces/i-page';
 import { LocalizacionPruebaService } from '../../../data/localizacion-prueba/services/localizacion-prueba.services';
-import { IGetLocalizacionPruebaByIdFromRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaFromRsViewModel, IGetLocalizacionPruebaPaginadoFromRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, IGetLocalizacionPruebaViewModel, ISaveLocalizacionPruebaFromRsViewModel, ISaveLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaFromRsViewModel, IUpdateLocalizacionPruebaViewModel } from '../viewModels/i-localizacion-prueba.viewModel';
+import { IGetLocalizacionPruebaByIdRsViewModel, IGetLocalizacionPruebaByIdViewModel, IGetLocalizacionPruebaRsViewModel, IGetLocalizacionPruebaViewModel, IGetLocalizacionPruebaPaginadoRsViewModel, IGetLocalizacionPruebaPaginadoViewModel, ISaveLocalizacionPruebaRsViewModel, ISaveLocalizacionPruebaViewModel, IUpdateLocalizacionPruebaRsViewModel, IUpdateLocalizacionPruebaViewModel  } from '../viewModels/i-localizacion-prueba.viewModel';
+import { IResponseStatusViewModel } from '../../base/viewModels/i-response-status.viewModel';
 
 
 @Injectable({
@@ -23,54 +23,51 @@ export class LocalizacionPruebaUseCase {
 
 	/**
 	* Constructor
-	* Se pueden llamar los servicios que van ser utilziados en los casos de uso
-	* @param _localizacionPruebaService: LocalizacionPruebaService
-	* @return Promise<Observable<ISaveLocalizacionPruebaFromRsViewModel>>
+	* Se pueden llamar los servicios que van ser utilizados en los casos de uso
 	 */
 	constructor()
 	{
 	}
-  // private _localizacionPruebaService: LocalizacionPruebaService
-  _localizacionPruebaService: LocalizacionPruebaService = inject(LocalizacionPruebaService);
+	_localizacionPruebaService: LocalizacionPruebaService = inject(LocalizacionPruebaService)
 
 	/**
 	* Guarda el registro actual
 	* @param localizacionPrueba: ISaveLocalizacionPruebaViewModel
-	* @return Promise<Observable<ISaveLocalizacionPruebaFromRsViewModel>>
+	* @return Promise<Observable<IResponseStatusViewModel<ISaveLocalizacionPruebaRsViewModel>>>
 	*/
-	public async saveLocalizacionPrueba(localizacionPrueba: ISaveLocalizacionPruebaViewModel): Promise<Observable<ISaveLocalizacionPruebaFromRsViewModel>> {
+	public async saveLocalizacionPrueba(localizacionPrueba: ISaveLocalizacionPruebaViewModel): Promise<Observable<IResponseStatusViewModel<ISaveLocalizacionPruebaRsViewModel>>> {
 	return await this._localizacionPruebaService.saveLocalizacionPrueba(localizacionPrueba);
 	}
 	/**
 	* Obtiene el/los registros
 	* @param localizacionPrueba: IGetLocalizacionPruebaViewModel
-	* @return Promise<Observable<IGetLocalizacionPruebaFromRsViewModel>>
+	* @return Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaRsViewModel>>>
 	*/
-	public async getLocalizacionPrueba(localizacionPrueba: IGetLocalizacionPruebaViewModel): Promise<Observable<IGetLocalizacionPruebaFromRsViewModel>> {
+	public async getLocalizacionPrueba(localizacionPrueba: IGetLocalizacionPruebaViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaRsViewModel>>> {
 	return await this._localizacionPruebaService.getLocalizacionPrueba(localizacionPrueba);
 	}
 	/**
 	* Obtiene el/los registros
 	* @param localizacionPrueba: IGetLocalizacionPruebaPaginadoViewModel
-	* @return Promise<Observable<IGetLocalizacionPruebaPaginadoFromRsViewModel>>
+	* @return Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaPaginadoRsViewModel>>>
 	*/
-	public async getLocalizacionPruebaPaginado(localizacionPrueba: IGetLocalizacionPruebaPaginadoViewModel): Promise<Observable<IPage<IGetLocalizacionPruebaPaginadoFromRsViewModel>>> {
+	public async getLocalizacionPruebaPaginado(localizacionPrueba: IGetLocalizacionPruebaPaginadoViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaPaginadoRsViewModel>>> {
 	return await this._localizacionPruebaService.getLocalizacionPruebaPaginado(localizacionPrueba);
 	}
 	/**
 	* Obtiene el registro por id
 	* @param localizacionPrueba: IGetLocalizacionPruebaByIdViewModel
-	* @return Promise<Observable<IGetLocalizacionPruebaByIdFromRsViewModel>>
+	* @return Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaByIdRsViewModel>>>
 	*/
-	public async getLocalizacionPruebaById(localizacionPrueba: IGetLocalizacionPruebaByIdViewModel): Promise<Observable<IGetLocalizacionPruebaByIdFromRsViewModel>> {
+	public async getLocalizacionPruebaById(localizacionPrueba: IGetLocalizacionPruebaByIdViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaByIdRsViewModel>>> {
 	return await this._localizacionPruebaService.getLocalizacionPruebaById(localizacionPrueba);
 	}
 	/**
 	* Obtiene el/los registros
 	* @param localizacionPrueba: IUpdateLocalizacionPruebaViewModel
-	* @return Promise<Observable<IUpdateLocalizacionPruebaFromRsViewModel>>
+	* @return Promise<Observable<IResponseStatusViewModel<IUpdateLocalizacionPruebaRsViewModel>>>
 	*/
-	public async updateLocalizacionPrueba(localizacionPrueba: IUpdateLocalizacionPruebaViewModel): Promise<Observable<IUpdateLocalizacionPruebaFromRsViewModel>> {
+	public async updateLocalizacionPrueba(localizacionPrueba: IUpdateLocalizacionPruebaViewModel): Promise<Observable<IResponseStatusViewModel<IUpdateLocalizacionPruebaRsViewModel>>> {
 	return await this._localizacionPruebaService.updateLocalizacionPrueba(localizacionPrueba);
 	}
 

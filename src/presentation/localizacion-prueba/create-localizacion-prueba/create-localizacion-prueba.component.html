@@ -1,0 +1,105 @@
+<!--
+* Vista create-localizacion-prueba.component.html
+*
+* @author  Carlos Anchundia
+* @date    08-05-2024
+* @name    create-localizacion-prueba.component.html
+* @package presentation
+* @subpackage localizacion-prueba
+-->
+
+<div class="container mt-5">
+	<form autocomplete="off" [formGroup]="formLocalizacionPrueba" (ngSubmit)="saveLocalizacionPrueba()">
+		<div class="card card-custom">
+			<div class="card-header card-header-custom">
+				<h4>Formulario LocalizacionPrueba</h4>
+			</div>
+
+			<div class="card-body card-body-custom">
+				<p class="c-black f-500 m-b-5">Información general</p>
+				<small>Información general del LocalizacionPrueba. Los campos señalados con <strong>(*)</strong> son obligatorios.</small><br/><br/>
+				<br/><br/>
+
+				<div class="row">
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="nombreLocalizacionPrueba"> Nombre (*)</label>
+					<input type="text" class="form-control" id="nombreLocalizacionPrueba" name="nombreLocalizacionPrueba"
+					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('nombreLocalizacionPrueba',formLocalizacionPrueba)}"
+					formControlName="nombreLocalizacionPrueba" placeholder="" required="required" maxlength="100"
+					[appTooltip]="_utilsService.getFieldErrorRequired('nombreLocalizacionPrueba', formLocalizacionPrueba)"
+					[isTooltipEnabled]="_utilsService.isFieldInvalid('nombreLocalizacionPrueba',formLocalizacionPrueba)"
+					(keypress)="this._validatorsService.validarAlfanumericos($event)" />
+				</div>
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="fechaLocalizacionPrueba"> fechaLocalizacionPrueba (*)</label>
+					<input type="date" class="form-control" id="fechaLocalizacionPrueba" name="fechaLocalizacionPrueba"
+					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('fechaLocalizacionPrueba',formLocalizacionPrueba)}"
+					formControlName="fechaLocalizacionPrueba" placeholder="" required="required" maxlength="8"
+					[appTooltip]="_utilsService.getFieldErrorRequired('fechaLocalizacionPrueba', formLocalizacionPrueba)"
+					[isTooltipEnabled]="_utilsService.isFieldInvalid('fechaLocalizacionPrueba',formLocalizacionPrueba)" />
+				</div>
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="isLocalizacionPrueba"> isLocalizacionPrueba (*)</label>
+					<div class="form-check form-switch form-switch-md">
+						<input type="checkbox" class="form-check-input" id="isLocalizacionPrueba" name="isLocalizacionPrueba"
+						[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)}"
+						formControlName="isLocalizacionPrueba" (click)="onChangeIsLocalizacionPrueba($event)" required="required" maxlength="8"
+						[appTooltip]="_utilsService.getFieldErrorRequired('isLocalizacionPrueba', formLocalizacionPrueba)"
+						[isTooltipEnabled]="_utilsService.isFieldInvalid('isLocalizacionPrueba',formLocalizacionPrueba)" />
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="enteroLocalizacionPrueba"> enteroLocalizacionPrueba (*)</label>
+					<input type="number" class="form-control" id="enteroLocalizacionPrueba" name="enteroLocalizacionPrueba"
+					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('enteroLocalizacionPrueba',formLocalizacionPrueba)}"
+					formControlName="enteroLocalizacionPrueba" placeholder="" required="required" min="1" max="999999999"
+					[appTooltip]="_utilsService.getFieldErrorRequired('enteroLocalizacionPrueba', formLocalizacionPrueba)"
+					[isTooltipEnabled]="_utilsService.isFieldInvalid('enteroLocalizacionPrueba',formLocalizacionPrueba)"
+					(keypress)="this._validatorsService.validarSoloNumeros($event)" />
+				</div>
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="decimalLocalizacionPrueba"> decimalLocalizacionPrueba (*)</label>
+					<input type="number" step="0.01" class="form-control" id="decimalLocalizacionPrueba" name="decimalLocalizacionPrueba"
+					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('decimalLocalizacionPrueba',formLocalizacionPrueba)}"
+					formControlName="decimalLocalizacionPrueba" placeholder="" required="required" min="0.01" max="999999999.99"
+					[appTooltip]="_utilsService.getFieldErrorRequired('decimalLocalizacionPrueba', formLocalizacionPrueba)"
+					[isTooltipEnabled]="_utilsService.isFieldInvalid('decimalLocalizacionPrueba',formLocalizacionPrueba)"
+					(keypress)="this._validatorsService.validarSoloDecimales($event)" />
+				</div>
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="descripcionLocalizacionPrueba"> descripcionLocalizacionPrueba (*)</label>
+					<textarea type="text" rows="3" class="form-control" id="descripcionLocalizacionPrueba" name="descripcionLocalizacionPrueba"
+					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('descripcionLocalizacionPrueba',formLocalizacionPrueba)}"
+					formControlName="descripcionLocalizacionPrueba" placeholder="" required="required" maxlength="250"
+					[appTooltip]="_utilsService.getFieldErrorRequired('descripcionLocalizacionPrueba', formLocalizacionPrueba)"
+					[isTooltipEnabled]="_utilsService.isFieldInvalid('descripcionLocalizacionPrueba',formLocalizacionPrueba)"
+					(keypress)="this._validatorsService.validarAlfanumericos($event)"> </textarea>
+				</div>
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="estadoLocalizacionPrueba"> estadoLocalizacionPrueba (*)</label>
+					<select class="form-select" id="estadoLocalizacionPrueba" name="estadoLocalizacionPrueba"
+					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)}"
+					formControlName="estadoLocalizacionPrueba" placeholder="" required="required"
+					[appTooltip]="_utilsService.getFieldErrorRequired('estadoLocalizacionPrueba', formLocalizacionPrueba)"
+					[isTooltipEnabled]="_utilsService.isFieldInvalid('estadoLocalizacionPrueba',formLocalizacionPrueba)"
+					(keypress)="this._validatorsService.validarAlfanumericos($event)">
+					<option value="1">Activo</option>
+					<option value="0">Inactivo</option>
+					</select>
+				</div>
+			</div>
+			<div class="gap-2 d-md-flex justify-content-md-end mt-2">
+				<button type="submit" class="btn btn-primary" ><i class="fa fa-save me-2"></i>Guardar</button>
+				<button type="button" class="btn btn-danger" (click)="cancelLocalizacionPrueba()"><i class="fa fa-close me-2"></i>GCancelar</button>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
