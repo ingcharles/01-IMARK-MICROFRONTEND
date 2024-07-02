@@ -1,121 +1,95 @@
+<!--
+* Vista index-localizacion-prueba.component.html
+*
+* @author  Carlos Anchundia
+* @date    08-05-2024
+* @name    index-localizacion-prueba.component.html
+* @package presentation
+* @subpackage localizacion-prueba
+-->
+
 <div class="container">
-  <h2>Listado de Localizaciones de Prueba</h2>
+	<div class="card-header">
+	<h4>{{titulo}}</h4>
+	<ul class="accion mt-3" title="Agregar {{titulo}}">
+		<li><a class="btn btn-info" [routerLink]="['/localizacion-prueba', -1]"><i class="fa fa-add"></i></a></li>
+	</ul>
+	</div>
 
-  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-    <div class="row justify-content-end align-items-center mb-3">
-      <label class="col-auto">Filtro: </label>
-      <div class="col-auto">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Buscar" formControlName="busqueda">
-          <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-        </div>
-      </div>
-    </div>
-  </form>
-  <!-- <div class="table-responsive table-responsive-scrollbar-top"></div> -->
-  <div class="table-responsive" style="height: 610px; overflow-y: auto;">
-    <table class="table table-bordered table-striped">
-      <thead class="table-primary">
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Estado</th>
-          <th>Fecha</th>
-          <th>Activo</th>
-          <th>Entero</th>
-          <th>Decimal</th>
-          <th>Descripción</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of localizacionPruebas">
-          <td>{{ item.idLocalizacionPrueba }}</td>
-          <td>{{ item.nombreLocalizacionPrueba }}</td>
-          <td>{{ item.estadoLocalizacionPrueba }}</td>
-          <td>{{ item.fechaLocalizacionPrueba ? (item.fechaLocalizacionPrueba | date: 'yyyy-MM-dd') : '' }}</td>
-          <td>{{ item.isLocalizacionPrueba }}</td>
-          <td>{{ item.enteroLocalizacionPrueba }}</td>
-          <td>{{ item.decimalLocalizacionPrueba }}</td>
-          <td>{{ item.descripcionLocalizacionPrueba }}</td>
-          <td>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Añadir"><i class="bi bi-table"></i></button>
-              <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit" ></i></button>
-              <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash" ></i></button>
-            </div>
-            <div class="dropdown mt-2">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuLocalizacionPrueba" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bars"></i>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLocalizacionPrueba">
-                <li><a class="dropdown-item" href="#">Editar</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Otra</a></li>
-              </ul>
-            </div>
+	<div class="card-body card-padding">
+		<form [formGroup]="filterForm" (ngSubmit)="obtenerLocalizacionPrueba()">
+			<div class="row justify-content-end align-items-center mb-3">
+				<label class="col-auto">Filtro: </label>
+				<div class="col-auto">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Buscar" maxlength="128" formControlName="busqueda">
+						<button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
 
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row justify-content-end align-items-center mb-3">
-    <div class="col-auto">
-      <label for="pageSizeSelect" class="mr-2">Filas por página:</label>
-    </div>
-    <div class="col-auto">
-      <select id="pageSizeSelect" class="form-select mr-3" (change)="changePageSize($event)">
-        <option *ngFor="let sizeOption of pageSizeOptions" [value]="sizeOption" [selected]="sizeOption === size">{{
-          sizeOption }}</option>
-      </select>
-    </div>
-    <div class="col-auto">
-      {{ page * size + (totalElements==0?0:1) }} - {{ page * size + numberOfElements }} de {{ totalElements }}
-    </div>
-    <div class="col-auto">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination mb-0">
-          <li class="page-item" [class.disabled]="page === 0">
-            <a class="page-link" (click)="changePage(page - 1)"><i class="bi bi-chevron-compact-left"></i> Anterior</a>
-          </li>
-          <li class="page-item" [class.disabled]="page === totalPages.length">
-            <a class="page-link" (click)="changePage(page + 1)">Siguiente<i class="bi bi-chevron-compact-right"></i></a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <!--
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination mb-0">
-          <li class="page-item" [class.disabled]="page === 0">
-            <a class="page-link" (click)="changePage(page - 1)">Anterior</a>
-          </li>
-          <li class="page-item" *ngFor="let p of totalPages" [class.active]="p === page">
-            <a class="page-link" (click)="changePage(p)">{{ p }}</a>
-          </li>
-          <li class="page-item" [class.disabled]="page === totalPages.length">
-            <a class="page-link" (click)="changePage(page + 1)">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <div class="col-md-6 text-right">
-      <div class="form-inline">
-        <label for="pageSizeSelect" class="mr-2">Registros por página:</label>
-        <select id="pageSizeSelect" class="form-select" (change)="changePageSize($event)">
-          <option *ngFor="let sizeOption of pageSizeOptions" [value]="sizeOption" [selected]="sizeOption === size">{{
-            sizeOption }}</option>
-        </select>
-      </div>
-    </div>
-    <div class="mb-2">
-      Mostrando {{ numberOfElements }} de {{ totalElements }} registros.
-    </div>
-  </div>
-</div> -->
+					</div>
+				</div>
+			</div>
+		</form>
+
+	<div class="table-responsive" style="height: 610px; overflow-y: auto; ">
+		<table class="table table-bordered table-striped">
+			<thead class="table-primary">
+				<tr>
+					<th>idLocalizacionPrueba</th>
+					<th>Nombre</th>
+					<th>fechaLocalizacionPrueba</th>
+					<th>isLocalizacionPrueba</th>
+					<th>enteroLocalizacionPrueba</th>
+					<th>decimalLocalizacionPrueba</th>
+					<th>descripcionLocalizacionPrueba</th>
+					<th>estadoLocalizacionPrueba</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of localizacionPrueba">
+						<td>{{ item.idLocalizacionPrueba }}</td>
+						<td>{{ item.nombreLocalizacionPrueba }}</td>
+						<td>{{ item.fechaLocalizacionPrueba ?(item.fechaLocalizacionPrueba | date: 'yyyy-MM-dd') : '' }}</td>
+						<td>{{ item.isLocalizacionPrueba }}</td>
+						<td>{{ item.enteroLocalizacionPrueba }}</td>
+						<td>{{ item.decimalLocalizacionPrueba }}</td>
+						<td>{{ item.descripcionLocalizacionPrueba }}</td>
+						<td>{{ item.estadoLocalizacionPrueba }}</td>
+					<td>
+						<div class="btn-group" role="group" >
+							<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Añadir"><i class="bi bi-table"></i></button>
+							<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></button>
+							<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row justify-content-end align-items-center mb-3">
+		<div class="col-auto">
+			<label for="pageSizeSelect" class="mr-2">Filas por página:</label>
+		</div>
+		<div class="col-auto">
+			<select id="pageSizeSelect" class="form-select mr-3" (change)="changePageSize($event)">
+				<option *ngFor="let sizeOption of pageSizeOptions" [value]="sizeOption" [selected]="sizeOption === size">{{ sizeOption }}</option>
+			</select>
+		</div>
+		<div class="col-auto">
+			{{ page * size + (totalElements==0?0:1) }} - {{ page * size + numberOfElements }} de {{ totalElements }}
+
+		</div>
+		<div class="col-auto">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination mb-0">
+					<li class="page-item" [class.disabled]="page === 0">
+						<a class="page-link" (click)="changePage(page - 1)"><i class="bi bi-chevron-compact-left"></i> Anterior</a>
+					</li>
+					<li class="page-item" [class.disabled]="page === totalPages.length">
+						<a class="page-link" (click)="changePage(page + 1)">Siguiente<i class="bi bi-chevron-compact-right"></i></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>

@@ -6,13 +6,14 @@ import { AlertsService } from '../../../data/base/services/alerts.service';
 import { LocalizacionPruebaUseCase } from '../../../domain/localizacion-prueba/usesCases/localizacion-prueba.usecase';
 import { IGetLocalizacionPruebaPaginadoViewModel } from '../../../domain/localizacion-prueba/viewModels/i-localizacion-prueba.viewModel';
 import { messages } from '../../../data/base/constants/messages';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-index-localizacion-prueba',
   templateUrl: './index-localizacion-prueba.component.html',
   styleUrls: ['./index-localizacion-prueba.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterModule],
 })
 export class IndexLocalizacionPruebaComponent implements OnInit {
   constructor() { }
@@ -22,12 +23,12 @@ export class IndexLocalizacionPruebaComponent implements OnInit {
   _alertsService: AlertsService = inject(AlertsService);
 
   filterForm!: FormGroup;
-  localizacionPruebas: any[] = [];
+  localizacionPrueba: any[] = [];
   page: number = 0;
   size: number = 10;
   totalPages: number[] = [];
   totalElements: number = 0;
-
+titulo:string= "Listado LocalizacionPrueba";
   numberOfElements: number = 0;
   pageSizeOptions: number[] = [5, 10, 25, 50, 100];
 
@@ -51,7 +52,7 @@ export class IndexLocalizacionPruebaComponent implements OnInit {
         this._loaderService.display(false);
         if (result.ok) {
 
-        this.localizacionPruebas = result.data?.content!;
+        this.localizacionPrueba = result.data?.content!;
         this.totalPages = Array(result.totalPages).fill(0).map((x, i) => i + 1);
         this.totalElements = result.totalElements;
         this.numberOfElements = result.numberOfElements;
@@ -65,7 +66,7 @@ export class IndexLocalizacionPruebaComponent implements OnInit {
 ;
   }
 
-  onSubmit(): void {
+  obtenerLocalizacionPrueba(): void {
     this.page = 0; // Reset to first page on filter change
     this.loadData();
   }
