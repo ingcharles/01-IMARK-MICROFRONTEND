@@ -1,22 +1,22 @@
 <!--
-* Vista index-localizacion-prueba.component.html
+* Vista index-localizacion-prueba-uno.component.html
 *
 * @author  Carlos Anchundia
 * @date    08-05-2024
-* @name    index-localizacion-prueba.component.html
+* @name    index-localizacion-prueba-uno.component.html
 * @package presentation
-* @subpackage localizacion-prueba
+* @subpackage localizacion-prueba-uno
 -->
 
 <div class="container">
 	<div class="card-header">
 	<h4>{{titulo}}</h4>
-		<button class="btn btn-success mt-3" [routerLink]="['/create-localizacion-prueba']"><i class="fa fa-add m-2"></i>Nuevo
+		<button class="btn btn-success mt-3" [routerLink]="['/create-localizacion-prueba-uno']"><i class="fa fa-add m-2"></i>Nuevo
 		registro </button>
 	</div>
 
 	<div class="card-body card-padding">
-		<form [formGroup]="filterForm" (ngSubmit)="obtenerLocalizacionPrueba(0)">
+		<form [formGroup]="filterForm" (ngSubmit)="obtenerLocalizacionPruebaUno(0)">
 			<div class="row justify-content-end align-items-center mb-3">
 				<label class="col-auto">Filtro: </label>
 				<div class="col-auto">
@@ -33,31 +33,23 @@
 		<table class="table table-bordered table-striped">
 			<thead class="table-primary">
 				<tr>
-					<th>idLocalizacionPrueba</th>
-					<th>nombreLocalizacionPrueba</th>
-					<th>isLocalizacionPrueba</th>
-					<th>enteroLocalizacionPrueba</th>
-					<th>decimalLocalizacionPrueba</th>
-					<th>descripcionLocalizacionPrueba</th>
-					<th>fechaLocalizacionPrueba</th>
-					<th>estadoLocalizacionPrueba</th>
+					<th>campoSerial</th>
+					<th>campoFechaUnicio</th>
+					<th>campoFechaFin</th>
+					<th>campoDescripcion</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let item of localizacionPrueba">
-						<td>{{ item.idLocalizacionPrueba }}</td>
-						<td>{{ item.nombreLocalizacionPrueba }}</td>
-						<td>{{ item.isLocalizacionPrueba }}</td>
-						<td>{{ item.enteroLocalizacionPrueba }}</td>
-						<td>{{ item.decimalLocalizacionPrueba }}</td>
-						<td>{{ item.descripcionLocalizacionPrueba }}</td>
-						<td>{{ item.fechaLocalizacionPrueba ?(item.fechaLocalizacionPrueba | date: 'yyyy-MM-dd') : '' }}</td>
-						<td>{{ item.estadoLocalizacionPrueba }}</td>
+				<tr *ngFor="let item of localizacionPruebaUno">
+						<td>{{ item.campoSerial }}</td>
+						<td>{{ item.campoFechaUnicio ?(item.campoFechaUnicio | date: 'yyyy-MM-dd') : '' }}</td>
+						<td>{{ item.campoFechaFin ?(item.campoFechaFin | date: 'yyyy-MM-dd') : '' }}</td>
+						<td>{{ item.campoDescripcion }}</td>
 					<td>
 						<div class="btn-group" role="group" >
 							<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Añadir"><i class="bi bi-table"></i></button>
-							<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" aaaaaaa [routerLink]="['/edit-localizacion-prueba',item.idLocalizacionPrueba]"><i class="fa fa-edit"></i></button>
+							<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" aaaaaaa [routerLink]="['/edit-localizacion-prueba-uno',item.campoSerial]"><i class="fa fa-edit"></i></button>
 							<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
 						</div>
 					</td>
@@ -82,10 +74,10 @@
 			<nav aria-label="Page navigation example">
 				<ul class="pagination mb-0">
 					<li class="page-item" [class.disabled]="page === 0">
-						<a class="page-link" (click)="obtenerLocalizacionPrueba(page - 1)"><i class="bi bi-chevron-compact-left"></i> Anterior</a>
+						<a class="page-link" (click)="obtenerLocalizacionPruebaUno(page - 1)"><i class="bi bi-chevron-compact-left"></i> Anterior</a>
 					</li>
 					<li class="page-item" [class.disabled]="page === totalPages.length">
-						<a class="page-link" (click)="obtenerLocalizacionPrueba(page + 1)">Siguiente<i class="bi bi-chevron-compact-right"></i></a>
+						<a class="page-link" (click)="obtenerLocalizacionPruebaUno(page + 1)">Siguiente<i class="bi bi-chevron-compact-right"></i></a>
 					</li>
 				</ul>
 			</nav>

@@ -1,6 +1,8 @@
+
 // // Custom Theming for Angular Material
 // // For more information: https://material.angular.io/guide/theming
 @use "sass:math";
+@import './styles/variables.scss';
 // @use '@angular/material' as mat;
 // @include mat.core();
 
@@ -153,76 +155,176 @@
     $index: 1rem;
     $mainVal: 1rem;
 
-    @if $res == 'md' {
-        $index: 2rem;
-        $mainVal: 1.5rem;
-    } @else if $res == 'lg' {
-        $index: 3rem;
-        $mainVal: 2rem;
-    } @else if $res == 'xl' {
-        $index: 4rem;
-        $mainVal: 2.5rem;
+    @if $res =='md' {
+      $index: 2rem;
+      $mainVal: 1.5rem;
     }
 
-    margin-bottom: math.div($index, 2) ; /* JUST FOR STYLING PURPOSE */
+    @else if $res =='lg' {
+      $index: 3rem;
+      $mainVal: 2rem;
+    }
+
+    @else if $res =='xl' {
+      $index: 4rem;
+      $mainVal: 2.5rem;
+    }
+
+    margin-bottom: math.div($index, 2);
+    /* JUST FOR STYLING PURPOSE */
 
     .form-check-input {
-        height: $mainVal;
-        width: math.div($index, 1) + 1.2rem; //calc(#{$index} + 1.2rem);
-        border-radius: $mainVal * 2;
+      height: $mainVal;
+      width: math.div($index, 1) + 1.2rem; //calc(#{$index} + 1.2rem);
+      border-radius: $mainVal * 2;
     }
-}
+  }
 
-.form-check-input {
-  clear: left;
-}
+  .form-check-input {
+    clear: left;
+  }
 
-.form-control:not(:invalid):not(.is-invalid):focus,.form-select:not(:invalid):not(.is-invalid):focus {
-  //color: var(--bs-body-color);
-  //background-color: var(--bs-body-bg);
-  //border-color: #86b7fe;
-  //border: 0px solid transparent;
-  border-color: #005cbb;
-  //border-bottom: 1px solid #005cbb;
-  //outline: 0;
-  box-shadow: none;
-}
+  .form-control:focus,.form-control:focus {
 
-.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus,.was-validated .form-select:invalid:focus, .form-select.is-invalid:focus {
-  //border-color: var(--bs-form-invalid-border-color);
-  box-shadow: 0 0 0 0.18rem rgba(220, 53, 69, 0.25);
- // border-color:1px solid #dc3545
- //box-shadow: none;
+   box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
 }
-// YOU CAN PUT ALL RESOLUTION HERE
-// sm - DEFAULT, md, lg, xl
+  .form-control:not(:invalid):not(.is-invalid):focus,
+  .form-select:not(:invalid):not(.is-invalid):focus {
+    border-color: #005cbb;
+  }
 
-.form-switch.form-switch-sm {
+  .was-validated .form-control:invalid:focus,
+  .form-control.is-invalid:focus,
+  .was-validated .form-select:invalid:focus,
+  .form-select.is-invalid:focus {
+    //border-color: var(--bs-form-invalid-border-color);
+    box-shadow: 0 0 0 0.18rem rgba(220, 53, 69, 0.25);
+    // border-color:1px solid #dc3545
+    //box-shadow: none;
+  }
+
+  // YOU CAN PUT ALL RESOLUTION HERE
+  // sm - DEFAULT, md, lg, xl
+
+  .form-switch.form-switch-sm {
     @include switch();
-}
+  }
 
-.form-switch.form-switch-md {
+  .form-switch.form-switch-md {
     @include switch('md');
-}
+  }
 
-.form-switch.form-switch-lg {
+  .form-switch.form-switch-lg {
     @include switch('lg');
-}
+  }
 
-.form-switch.form-switch-xl {
+  .form-switch.form-switch-xl {
     @include switch('xl');
-}
+  }
 
+  thead.table-primary th {
+    --bs-table-bg: var(--bs-blue);
+    --bs-table-color: var(--bs-white);
+    font-weight: 500;
+  }
+
+
+  .card-custom {
+    border-top: 5px solid #005cbb;
+  }
+
+  .card-header.card-header-custom {
+    background-color: #0e4c7f; //$primary-color-light;
+    color: white;
+    position: relative;
+    padding: 15px 25px;
+    margin-left: -5px;
+    margin-right: -15px;
+    margin-top: 10px;
+    border-radius: 0px;
+  }
+
+  .card-header.card-header-custom::after {
+    content: '';
+    position: absolute;
+    top: -25px;
+    bottom: 0;
+    width: 15px;
+    background-color: #0e467d;
+  }
+
+  .card-header.card-header-custom::before {
+    content: "";
+    position: absolute;
+    top: 59px;
+    bottom: -25px;
+    width: 5px;
+    background-color: #bcc5ce;
+  }
+
+  .card-header.card-header-custom::before {
+    left: 0px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 40%);
+  }
+
+  .card-header.card-header-custom::after {
+    right: 0px;
+    clip-path: polygon(0 30%, -100% 0, 100% 30%, 0% 30%);
+  }
+
+.swal2-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.swal2-confirm {
+    order: 2;
+    background-color: $primary-color-light;
+    border-color: #0b5ed7 !important;
+  }
+
+.swal2-cancel {
+    order: 1;
+  }
+
+
+
+
+
+
+
+
+
+  .dark-theme {
+    background-color: #333; /* Ejemplo de fondo oscuro */
+    color: #fff; /* Ejemplo de color de texto blanco */
+  }
+  :host-context(body.dark-theme) {
+    background-color: #333; /* Ejemplo de fondo oscuro */
+    color: #fff; /* Ejemplo de color de texto blanco */
+  }
 
 
   .dark {
 
+    .card-header.card-header-custom {
+      background-color: $primary-color-dark;
+      color: white;
+      position: relative;
+      padding: 15px 25px;
+      margin-left: -5px;
+      margin-right: -15px;
+      margin-top: 10px;
+      border-radius: 0px;
+    }
     .form-control {
       font-size: 16px;
     }
   }
 
 }
+
+
 
 html,
 body {

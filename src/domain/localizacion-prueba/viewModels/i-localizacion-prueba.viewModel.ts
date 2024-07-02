@@ -25,6 +25,7 @@ export interface ISaveLocalizacionPruebaRsViewModel {
 * @name ISaveLocalizacionPruebaViewModel
 */
 export interface ISaveLocalizacionPruebaViewModel extends IAuditoriaViewModel {
+  idLocalizacionPrueba?: string | null;
 	nombreLocalizacionPrueba?: string | null;
 	fechaLocalizacionPrueba?: Date | null;
 	isLocalizacionPrueba?: boolean | null;

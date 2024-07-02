@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Swal, { SweetAlertIcon} from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 
 
@@ -7,12 +7,14 @@ import Swal, { SweetAlertIcon} from 'sweetalert2';
 export class AlertsService {
   constructor() { }
   alertMessage(title: string, message: string = '', icono: SweetAlertIcon) {
+    const timer = icono == 'success' ? 1800 : 0;
     Swal.fire({
       title: title,
       text: message,
       icon: icono,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#0d6efd',
       confirmButtonText: 'Aceptar',
+      timer: timer,
     })
   }
   alertConfirm(title: string, message: string, fun: Function) {
@@ -21,12 +23,15 @@ export class AlertsService {
       text: message,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#0d6efd',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
-
-
+      customClass: {
+        actions: 'swal2-actions',
+        confirmButton: 'swal2-confirm',
+        cancelButton: 'swal2-cancel',
+      }
     }).then((result) => {
       if (result.isConfirmed) {
         fun();
@@ -40,7 +45,7 @@ export class AlertsService {
       text: message,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#0d6efd',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
@@ -62,15 +67,15 @@ export class AlertsService {
           `,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#0d6efd',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
       focusConfirm: false,
       preConfirm: () => {
-         const inputValue = (document.getElementById('swal-input1') as HTMLInputElement).value;
+        const inputValue = (document.getElementById('swal-input1') as HTMLInputElement).value;
 
-                if (!inputValue) {
+        if (!inputValue) {
           Swal.showValidationMessage('Este campo es requerido');
         }
         return inputValue;

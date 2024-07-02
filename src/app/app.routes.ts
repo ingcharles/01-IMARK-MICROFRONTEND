@@ -27,4 +27,28 @@ export const routes: Routes = [
       ),
     title: 'Dashboard'
   },
+  {
+    path: 'create-localizacion-prueba-uno',
+    loadComponent: () =>
+      import('../presentation/localizacion-prueba-uno/create-localizacion-prueba-uno/create-localizacion-prueba-uno.component').then(
+        (c) => c.CreateLocalizacionPruebaUnoComponent
+      ),
+    title: 'Dashboard'
+  },
+  {
+    path: 'edit-localizacion-prueba-uno/:id',
+    loadComponent: () =>
+      import('../presentation/localizacion-prueba-uno/create-localizacion-prueba-uno/create-localizacion-prueba-uno.component').then(
+        (c) => c.CreateLocalizacionPruebaUnoComponent
+      ),
+    title: 'Dashboard'
+  },
+  {
+    path: 'index-localizacion-prueba-uno',
+    loadComponent: () =>
+      import('../presentation/localizacion-prueba-uno/index-localizacion-prueba-uno/index-localizacion-prueba-uno.component').then(
+        (c) => c.IndexLocalizacionPruebaUnoComponent
+      ),
+    title: 'Dashboard'
+  },
 ];
