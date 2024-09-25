@@ -1,0 +1,40 @@
+<!--
+* Vista create-prueba.component.html
+*
+* @author  Carlos Anchundia
+* @date    08-05-2024
+* @name    create-prueba.component.html
+* @package presentation
+* @subpackage prueba
+-->
+
+<div class="container mt-5">
+	<form autocomplete="off" [formGroup]="formPrueba" (ngSubmit)="savePrueba()">
+		<div class="card card-custom">
+			<div class="card-header card-header-custom">
+				<h4>Formulario Prueba</h4>
+			</div>
+
+			<div class="card-body card-body-custom">
+				<small>Información general del Prueba. Los campos señalados con <strong>(*)</strong> son obligatorios.</small><br/><br/>
+
+				<div class="row mt-3">
+
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+					<label for="nombre"> nombre (*)</label>
+					<input type="text" class="form-control" id="nombre" name="nombre"
+					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('nombre',formPrueba)}"
+					formControlName="nombre" placeholder="" required="required" maxlength="8"  
+					[appTooltip]="_utilsService.getFieldErrorRequired('nombre', formPrueba)"
+					[isTooltipEnabled]="_utilsService.isFieldInvalid('nombre',formPrueba)"
+					(keypress)="this._validatorsService.validarAlfanumericos($event)" />
+				</div>
+			</div>
+			<div class="gap-2 d-md-flex justify-content-md-end mt-2">
+				<button type="button" class="btn btn-danger" (click)="cancelPrueba()"><i class="fa fa-close me-2"></i>Cancelar</button>
+				<button type="submit" class="btn btn-primary" ><i class="fa fa-save me-2"></i>Guardar</button>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>

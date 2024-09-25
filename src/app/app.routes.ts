@@ -51,4 +51,33 @@ export const routes: Routes = [
       ),
     title: 'Dashboard'
   },
+  {
+    path: 'index-prueba',
+    loadComponent: () =>
+      import('../presentation/prueba/index-prueba/index-prueba.component').then(
+        (c) => c.IndexPruebaComponent
+      ),
+    title: 'Dashboard'
+  },
+  {
+    path: 'create-prueba',
+    loadComponent: () =>
+      import('../presentation/prueba/create-prueba/create-prueba.component').then(
+        (c) => c.CreatePruebaComponent
+      ),
+    title: 'Dashboard'
+  },
+  {
+    path: 'edit-prueba/:id',
+    loadComponent: () =>
+      import('../presentation/prueba/create-prueba/create-prueba.component').then(
+        (c) => c.CreatePruebaComponent
+      ),
+    title: 'Dashboard'
+  },
+  // {
+  //   path: 'prueba',
+  //     loadChildren: () =>
+  //     import('../presentation/prueba/prueba.module').then((m) => m.PruebaModule)
+  //   },
 ];

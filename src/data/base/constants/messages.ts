@@ -37,6 +37,7 @@ export const messages = {
   confirmAnular: "¿Está seguro de anular el registro?",
   serviceFail: "Acceso denegado al servicio",
   serviceNotFound: "Servicio no disponible",
+  serviceServerError: "Error interno en el servidor",
   isWarning: isWarning,
   isSuccess: isSuccess,
   isInfo: isInfo,

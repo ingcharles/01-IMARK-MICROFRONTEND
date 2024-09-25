@@ -1,0 +1,82 @@
+<!--
+* Vista index-prueba.component.html
+*
+* @author  Carlos Anchundia
+* @date    08-05-2024
+* @name    index-prueba.component.html
+* @package presentation
+* @subpackage prueba
+-->
+
+<div class="container">
+	<div class="card-header">
+	<h4>{{titulo}}</h4>
+		<button class="btn btn-success mt-3" [routerLink]="['/create-prueba']"><i class="fa fa-add m-2"></i>Nuevo 
+		registro </button>
+	</div>
+
+	<div class="card-body card-padding">
+		<form [formGroup]="filterForm" (ngSubmit)="obtenerPrueba(0)">
+			<div class="row justify-content-end align-items-center mb-3">
+				<label class="col-auto">Filtro: </label>
+				<div class="col-auto">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Buscar" maxlength="128" formControlName="busqueda">
+						<button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+
+					</div>
+				</div>
+			</div>
+		</form>
+
+	<div class="table-responsive" style="height: 640px; overflow-y: auto; ">
+		<table class="table table-bordered table-striped">
+			<thead class="table-primary">
+				<tr>
+					<th>id</th>
+					<th>nombre</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of prueba">
+						<td>{{ item.id }}</td>
+						<td>{{ item.nombre }}</td>
+					<td>
+						<div class="btn-group" role="group" >
+							<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Añadir"><i class="bi bi-table"></i></button>
+							<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" aaaaaaa [routerLink]="['/edit-prueba',item.id]"><i class="fa fa-edit"></i></button>
+							<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row justify-content-end align-items-center mb-3 mt-2">
+		<div class="col-auto">
+			<label for="pageSizeSelect" class="mr-2">Filas por página:</label>
+		</div>
+		<div class="col-auto">
+			<select id="pageSizeSelect" class="form-select mr-3" (change)="changePageSize($event)">
+				<option *ngFor="let sizeOption of pageSizeOptions" [value]="sizeOption" [selected]="sizeOption === size">{{ sizeOption }}</option>
+			</select>
+		</div>
+		<div class="col-auto">
+			{{ page * size + (totalElements==0?0:1) }} - {{ page * size + numberOfElements }} de {{ totalElements }}
+
+		</div>
+		<div class="col-auto">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination mb-0">
+					<li class="page-item" [class.disabled]="page === 0">
+						<a class="page-link" (click)="obtenerPrueba(page - 1)"><i class="bi bi-chevron-compact-left"></i> Anterior</a>
+					</li>
+					<li class="page-item" [class.disabled]="page === totalPages.length">
+						<a class="page-link" (click)="obtenerPrueba(page + 1)">Siguiente<i class="bi bi-chevron-compact-right"></i></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
