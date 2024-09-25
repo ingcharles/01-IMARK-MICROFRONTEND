@@ -17,13 +17,22 @@ import { AlertsService } from '../../../data/base/services/alerts.service';
 import { LoaderService } from '../../../data/base/services/loader.service';
 import { PruebaUseCase } from '../../../domain/prueba/usesCases/prueba.usecase';
 import { IGetPruebaPaginadoViewModel } from '../../../domain/prueba/viewModels/i-prueba.viewModel';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TagModule } from 'primeng/tag';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
 
 @Component({
 	selector: 'index-prueba-page',
 	templateUrl: './index-prueba.component.html',
 	styleUrls: ['./index-prueba.component.scss'],
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule, RouterModule]
+	imports: [TableModule, TagModule, ButtonModule,IconFieldModule, InputIconModule, 
+		CommonModule, InputTextModule, ],
+	
 })
 export class IndexPruebaComponent implements OnInit {
 	constructor(){ }
@@ -45,6 +54,15 @@ export class IndexPruebaComponent implements OnInit {
 	public titulo:string = 'Listado Prueba';
 	public filterForm!: FormGroup;
 	public prueba: any[] = [];
+
+	first = 0;
+
+    rows = 10;
+	pageChange(event:any ) {
+		console.log("event",event)
+        this.first = event.first;
+        this.rows = event.rows;
+    }
 	ngOnInit(): void {
 		this.filterForm = this._fb.group({
 			busqueda: ['']
@@ -82,4 +100,14 @@ export class IndexPruebaComponent implements OnInit {
 	this.loadData();
 	}
 
+	getSeverity(status: string):any {
+        switch (status) {
+            case 'INSTOCK':
+                return 'success';
+            case 'LOWSTOCK':
+                return 'warning';
+            case 'OUTOFSTOCK':
+                return 'danger';
+        }
+    }
 }
