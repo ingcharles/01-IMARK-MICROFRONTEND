@@ -20,7 +20,13 @@ import { UtilsService } from '../../../data/base/services/utils.service';
 import { ValidatorsService } from '../../../data/base/services/validators.service';
 import { PruebaUseCase } from '../../../domain/prueba/usesCases/prueba.usecase';
 import { IGetPruebaByIdViewModel, ISavePruebaViewModel, IUpdatePruebaViewModel } from '../../../domain/prueba/viewModels/i-prueba.viewModel';
-
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { FieldsetModule } from 'primeng/fieldset';
+import { CardModule } from 'primeng/card';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 @Component({
 	selector: 'create-prueba-page',
 	templateUrl: './create-prueba.component.html',
@@ -30,6 +36,14 @@ import { IGetPruebaByIdViewModel, ISavePruebaViewModel, IUpdatePruebaViewModel }
 		CommonModule,
 		ReactiveFormsModule,
 		TooltipDirective,
+		ButtonModule,
+		InputTextModule,
+		FieldsetModule,
+		CardModule,
+		InputMaskModule,
+		InputSwitchModule,
+		InputTextareaModule
+
 	],
 	providers: [],
 	host: {ngSkipHydration: 'true' }
@@ -63,8 +77,8 @@ export class CreatePruebaComponent implements OnInit {
 	this._utilsService.showTooltip(this._platformId);
 
 	this.formPrueba = new FormGroup({
-		id: new FormControl(null, Validators.compose([Validators.max(999999999)])),
-		nombre: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(8)])),
+		id: new FormControl(null, [Validators.max(999999999)]),
+		nombre: new FormControl(null, [Validators.required, Validators.maxLength(8)]),
 	});
 
 	this.sub = this._activatedRoute.params.subscribe(params => {

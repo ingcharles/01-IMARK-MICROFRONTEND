@@ -8,33 +8,96 @@
 * @subpackage prueba
 -->
 
-<div class="container mt-5">
+
+<div class="p-4 surface-200">
 	<form autocomplete="off" [formGroup]="formPrueba" (ngSubmit)="savePrueba()">
 		<div class="card card-custom">
 			<div class="card-header card-header-custom">
 				<h4>Formulario Prueba</h4>
 			</div>
+			<p-card>
+				<p class="m-0">
+					<small>Información general del Prueba. Los campos señalados con <strong>(*)</strong> son
+						obligatorios.</small><br /><br />
+				</p>
+				<p-fieldset legend="Datos Generales">
+					<div class="formgrid grid">
+						<div class="field col-12 md:col-6">
+							<label for="nombre">Nombre</label>
+							<input pInputText id="nombre" formControlName="nombre" required class="p-inputtext-sm w-full"
+								(keypress)="this._validatorsService.validarAlfanumericos($event)"
+								[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('nombre',formPrueba)}" />
+						</div>
+						<div class="field col-12 md:col-6">
+							<label for="lastname6">Lastname</label>
+							<input id="lastname6" pInputText type="text" class="p-inputtext-sm w-full">
+						</div>
+						<div class="field col-12">
+							<label for="address">Address</label>
+							<textarea id="address" pInputTextarea type="text" rows="4" class="p-inputtext-sm w-full"></textarea>
+						</div>
+						<div class="field col-12">
+							<label for="address">inputSwitch</label>
+							<p-inputSwitch class="p-2 w-full"/>
+						</div>
+						<div class="field col-12">
+							<label for="address">inputMask</label>
+							<p-inputMask mask="99-999999" characterPattern="[0-9]" size="small" placeholder="99-999999" class="p-inputtext-sm p-2 w-full" />
+						</div>
+						<div class="field col-12 md:col-6">
+							<label for="city">City</label>
+							<input id="city" type="text"
+								class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+						</div>
+						<div class="field col-12 md:col-3">
+							<label for="state">State</label>
+							<select id="state"
+								class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary"
+								style="appearance: auto">
+								<option>Arizona</option>
+								<option>California</option>
+								<option>Florida</option>
+								<option>Ohio</option>
+								<option>Washington</option>
+							</select>
+						</div>
+						<div class="field col-12 md:col-3">
+							<label for="zip">Zip</label>
+							<input id="zip" type="text"
+								class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+						</div>
+					</div>
+				</p-fieldset>
+			</p-card>
 
-			<div class="card-body card-body-custom">
-				<small>Información general del Prueba. Los campos señalados con <strong>(*)</strong> son obligatorios.</small><br/><br/>
 
-				<div class="row mt-3">
 
-				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
+			<div class="row mt-3">
+				<!-- <p-inputMask 
+					mask="99-999999" 
+					[(ngModel)]="value" 
+					placeholder="99-999999"   class="ng-invalid ng-dirty" /> -->
+
+				<!-- <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
 					<label for="nombre"> nombre (*)</label>
 					<input type="text" class="form-control" id="nombre" name="nombre"
-					[ngClass]="{'is-invalid': _utilsService.isFieldInvalid('nombre',formPrueba)}"
+					
 					formControlName="nombre" placeholder="" required="required" maxlength="8"  
 					[appTooltip]="_utilsService.getFieldErrorRequired('nombre', formPrueba)"
 					[isTooltipEnabled]="_utilsService.isFieldInvalid('nombre',formPrueba)"
 					(keypress)="this._validatorsService.validarAlfanumericos($event)" />
-				</div>
+				</div> -->
 			</div>
-			<div class="gap-2 d-md-flex justify-content-md-end mt-2">
-				<button type="button" class="btn btn-danger" (click)="cancelPrueba()"><i class="fa fa-close me-2"></i>Cancelar</button>
-				<button type="submit" class="btn btn-primary" ><i class="fa fa-save me-2"></i>Guardar</button>
+			<div class="flex align-items-center justify-content-end mb-2">
+				<p-button label="Cancelar" icon="pi pi-times" class="mr-2" size="small" severity="danger"
+					(click)="cancelPrueba()" />
+				<p-button label="Guardar" type="submit" icon="pi pi-save" class="mr-2" size="small"
+					severity="primary" />
+
+				<!-- <button type="button" class="btn btn-danger"><i class="fa fa-close me-2"></i>Cancelar</button>
+				<button type="submit" class="btn btn-primary" ><i class="fa fa-save me-2"></i>Guardar</button> -->
 			</div>
-			</div>
+
 		</div>
 	</form>
 </div>
