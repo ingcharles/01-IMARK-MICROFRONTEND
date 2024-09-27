@@ -8,7 +8,6 @@
 * @subpackage prueba
 -->
 
-
 <div class="p-4 surface-200">
 	<form autocomplete="off" [formGroup]="formPrueba" (ngSubmit)="savePrueba()">
 		<div class="card card-custom">
@@ -24,7 +23,8 @@
 					<div class="formgrid grid">
 						<div class="field col-12 md:col-6">
 							<label for="nombre">Nombre</label>
-							<input pInputText id="nombre" formControlName="nombre" required class="p-inputtext-sm w-full"
+							<input pInputText id="nombre" formControlName="nombre" class="p-inputtext-sm w-full"
+								[pTooltip]="'Este es nombre'" tooltipPosition="top"
 								(keypress)="this._validatorsService.validarAlfanumericos($event)"
 								[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('nombre',formPrueba)}" />
 						</div>
@@ -34,15 +34,17 @@
 						</div>
 						<div class="field col-12">
 							<label for="address">Address</label>
-							<textarea id="address" pInputTextarea type="text" rows="4" class="p-inputtext-sm w-full"></textarea>
+							<textarea id="address" pInputTextarea type="text" rows="4" [pTooltip]="'Este es nombre'"
+								tooltipPosition="top" class="p-inputtext-sm w-full"></textarea>
 						</div>
 						<div class="field col-12">
 							<label for="address">inputSwitch</label>
-							<p-inputSwitch class="p-2 w-full"/>
+							<p-inputSwitch class="p-2 w-full" />
 						</div>
 						<div class="field col-12">
 							<label for="address">inputMask</label>
-							<p-inputMask mask="99-999999" characterPattern="[0-9]" size="small" placeholder="99-999999" class="p-inputtext-sm p-2 w-full" />
+							<p-inputMask mask="99-999999" characterPattern="[0-9]" size="small" placeholder="99-999999"
+								class="p-inputtext-sm p-2 w-full" />
 						</div>
 						<div class="field col-12 md:col-6">
 							<label for="city">City</label>
@@ -68,35 +70,13 @@
 						</div>
 					</div>
 				</p-fieldset>
+				<div class="flex align-items-center justify-content-end my-2">
+					<p-button label="Cancelar" icon="pi pi-times" class="mr-2" size="small" severity="danger"
+						(click)="cancelPrueba()" />
+					<p-button label="Guardar" type="submit" icon="pi pi-save" class="mr-2" size="small"
+						severity="primary" />
+				</div>
 			</p-card>
-
-
-
-			<div class="row mt-3">
-				<!-- <p-inputMask 
-					mask="99-999999" 
-					[(ngModel)]="value" 
-					placeholder="99-999999"   class="ng-invalid ng-dirty" /> -->
-
-				<!-- <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2">
-					<label for="nombre"> nombre (*)</label>
-					<input type="text" class="form-control" id="nombre" name="nombre"
-					
-					formControlName="nombre" placeholder="" required="required" maxlength="8"  
-					[appTooltip]="_utilsService.getFieldErrorRequired('nombre', formPrueba)"
-					[isTooltipEnabled]="_utilsService.isFieldInvalid('nombre',formPrueba)"
-					(keypress)="this._validatorsService.validarAlfanumericos($event)" />
-				</div> -->
-			</div>
-			<div class="flex align-items-center justify-content-end mb-2">
-				<p-button label="Cancelar" icon="pi pi-times" class="mr-2" size="small" severity="danger"
-					(click)="cancelPrueba()" />
-				<p-button label="Guardar" type="submit" icon="pi pi-save" class="mr-2" size="small"
-					severity="primary" />
-
-				<!-- <button type="button" class="btn btn-danger"><i class="fa fa-close me-2"></i>Cancelar</button>
-				<button type="submit" class="btn btn-primary" ><i class="fa fa-save me-2"></i>Guardar</button> -->
-			</div>
 
 		</div>
 	</form>

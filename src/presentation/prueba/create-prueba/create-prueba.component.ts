@@ -27,6 +27,7 @@ import { CardModule } from 'primeng/card';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
 	selector: 'create-prueba-page',
 	templateUrl: './create-prueba.component.html',
@@ -42,7 +43,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 		CardModule,
 		InputMaskModule,
 		InputSwitchModule,
-		InputTextareaModule
+		InputTextareaModule,
+		TooltipModule
 
 	],
 	providers: [],
