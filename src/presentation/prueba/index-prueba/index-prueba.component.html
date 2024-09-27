@@ -9,92 +9,30 @@
 -->
 
 <div class="p-3 surface-100">
-
-
-	<!-- <div class="container">
-	<div class="card-header">
-		<h4>{{titulo}}</h4>
-		<button class="btn btn-success mt-3" [routerLink]="['/create-prueba']"><i class="fa fa-add m-2"></i>Nuevo
-			registro </button>
-	</div> -->
-
-	<!-- <div class="card-body card-padding"> -->
-	<!-- (ngSubmit)="obtenerPrueba(0)" -->
-	<!-- <form [formGroup]="filterForm" >
-			<div class="row justify-content-end align-items-center mb-3">
-				<label class="col-auto">Filtro: </label>
-				<div class="col-auto">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Buscar" maxlength="128"
-							formControlName="busqueda">
-						<button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-					</div>
-				</div>
-			</div>
-		</form> -->
-
-	<!-- <p-toast /> -->
 	<p-toolbar styleClass="mb-4 gap-2">
 		<ng-template pTemplate="left">
 			<p-button severity="primary" label="Nuevo" icon="pi pi-plus" class="mr-2"
 				[routerLink]="['/create-prueba']" />
-			<!-- (onClick)="openNew()" -->
-			<!-- <p-button 
-            severity="danger" 
-            label="Delete" 
-            icon="pi pi-trash" 
-            (onClick)="deleteSelectedProducts()" 
-            [disabled]="!selectedProducts || !selectedProducts.length" /> -->
 		</ng-template>
-
-		<!-- <ng-template pTemplate="right">
-        <p-fileUpload 
-            mode="basic" 
-            accept="image/*" 
-            [maxFileSize]="1000000" 
-            label="Import" 
-            chooseLabel="Import" 
-            class="mr-2 inline-block" />
-        <p-button 
-            severity="help" 
-            label="Export" 
-            icon="pi pi-upload" />
-    </ng-template> -->
 	</p-toolbar>
-	<!-- #dt [value]="prueba" [rows]="10" [paginator]="true" [globalFilterFields]="['id', 'nombre']"
-			[tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-			[showCurrentPageReport]="true"> -->
-	<!-- [(selection)]="selectedCustomers" -->
-	<!-- page * size + (totalElements==0?0:1) }} - {{ page * size + numberOfElements  -->
-
-	<p-table #dt [value]="prueba" dataKey="id" [rowHover]="true" [rows]="size" [totalRecords]="totalElements"
+	<p-table #dt [value]="pruebaRecords" dataKey="id" [rowHover]="true" [rows]="size" [totalRecords]="totalElements"
 		[showCurrentPageReport]="true" [rowsPerPageOptions]="pageSizeOptions" [loading]="loading" [paginator]="true"
 		currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} registros"
-		(onPage)="loadRecordsLazy($event)" [filterDelay]="0" [lazy]="true" [globalFilterFields]="['id', 'nombre']">
-
+		(onPage)="changePage($event)" [filterDelay]="0" [lazy]="true" [globalFilterFields]="['id', 'nombre']">
 
 		<ng-template pTemplate="caption">
 			<div class="flex">
 				<div class="flex align-items-center justify-content-center" style="flex: 1;">
-					<h2 class="m-0">Listado de pruebas</h2>
+					<h2 class="m-0">{{title}}</h2>
 				</div>
 				<div class="flex align-items-center justify-content-end" style="gap: 10px;">
-					<p-button [outlined]="true" icon="pi pi-filter-slash" label="Limpiar" (click)="limpiarBusqueda()" />
+					<p-button [outlined]="true" icon="pi pi-filter-slash" label="Limpiar" (click)="clearSearch()" />
 					<span class="p-input-icon-left">
 						<i class="pi pi-search"></i>
-						<input pInputText type="text" [value]="busqueda" (input)="obtenerPrueba($event)"
+						<input pInputText type="text" [value]="search" (input)="inputSearch($event)"
 							placeholder="Buscar..." />
 					</span>
 				</div>
-
-				<!-- <p-iconField iconPosition="left">
-						<p-inputIcon>
-							<i class="pi pi-search"></i>
-						</p-inputIcon>
-						<input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-							placeholder="Keyboard Search" />
-					</p-iconField> -->
 			</div>
 		</ng-template>
 		<ng-template pTemplate="header">
@@ -105,18 +43,9 @@
 				<th pSortableColumn="id" style="min-width:5rem">
 					ID <p-sortIcon field="id" />
 				</th>
-				<!-- <th>
-                Image
-            </th> -->
-				<th pSortableColumn="nombre">
+				<th pSortableColumn="nombre" style="min-width:10rem">
 					Nombre <p-sortIcon field="nombre" />
 				</th>
-				<!-- <th pSortableColumn="category" style="min-width:10rem">
-                Category <p-sortIcon field="category" />
-            </th>
-            <th pSortableColumn="rating">
-                Reviews <p-sortIcon field="rating" />
-            </th>-->
 				<th pSortableColumn="estado" style="min-width:10rem">
 					Estado <p-sortIcon field="nombre" />
 				</th>
@@ -134,92 +63,23 @@
 				<td>
 					{{ item.nombre }}
 				</td>
-				<!-- <td>
-                <img 
-                    [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" 
-                    [alt]="product.nombre" 
-                    width="50" 
-                    class="shadow-4" />
-            </td>
-            <td>
-                {{ product.price | currency : 'USD' }}
-            </td>
-            <td>
-                {{ product.category }}
-            </td>
-            <td>
-                <p-rating [(ngModel)]="product.rating" [readonly]="true" [cancel]="false" />
-            </td>-->
 				<td>
-					<p-tag [value]="item.nombre" [severity]="getSeverity(item.nombre)" />
+					<p-tag [value]="item.nombre" [severity]="getStatus(item.nombre)" />
 				</td>
 				<td>
-					<!-- <button type="button" pButton pRipple icon="pi pi-plus" severity="primary">
-					</button> -->
-					<!-- (click)="selectProduct(product)" -->
 					<p-button icon="pi pi-plus" class="mr-2" size="small" title="Añadir" severity="primary" />
-					<p-button icon="pi pi-pen-to-square" class="mr-2" size="small" title="Editar" severity="success" [routerLink]="['/edit-prueba',item.id]" />
+					<p-button icon="pi pi-pen-to-square" class="mr-2" size="small" title="Editar" severity="success"
+						[routerLink]="['/edit-prueba',item.id]" />
 					<p-button icon="pi pi-trash" class="mr-2" size="small" title="Eliminar" severity="danger" />
-					<!-- (onClick)="editProduct(product)"  -->
-					<!-- <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" aaaaaaa [routerLink]="['/edit-prueba',item.id]"><i class="fa fa-edit"></i></button> -->
+
 				</td>
 			</tr>
 		</ng-template>
 		<ng-template pTemplate="summary">
 			<div class="flex align-items-center justify-content-between">
-				En total hay {{ prueba ? prueba.length : 0 }} prueba.
+				En total hay {{ pruebaRecords ? pruebaRecords.length : 0 }} prueba.
 			</div>
 		</ng-template>
 	</p-table>
-	<!-- <div class="table-responsive" style="height: 640px; overflow-y: auto; ">
-		<table class="table table-bordered table-striped">
-			<thead class="table-primary">
-				<tr>
-					<th>id</th>
-					<th>nombre</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let item of prueba">
-						<td>{{ item.id }}</td>
-						<td>{{ item.nombre }}</td>
-					<td>
-						<div class="btn-group" role="group" >
-							<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Añadir"><i class="bi bi-table"></i></button>
-							<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Editar" aaaaaaa [routerLink]="['/edit-prueba',item.id]"><i class="fa fa-edit"></i></button>
-							<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="row justify-content-end align-items-center mb-3 mt-2">
-		<div class="col-auto">
-			<label for="pageSizeSelect" class="mr-2">Filas por página:</label>
-		</div>
-		<div class="col-auto">
-			<select id="pageSizeSelect" class="form-select mr-3" (change)="changePageSize($event)">
-				<option *ngFor="let sizeOption of pageSizeOptions" [value]="sizeOption" [selected]="sizeOption === size">{{ sizeOption }}</option>
-			</select>
-		</div>
-		<div class="col-auto">
-			{{ page * size + (totalElements==0?0:1) }} - {{ page * size + numberOfElements }} de {{ totalElements }}
 
-		</div>
-		<div class="col-auto">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination mb-0">
-					<li class="page-item" [class.disabled]="page === 0">
-						<a class="page-link" (click)="obtenerPrueba(page - 1)"><i class="bi bi-chevron-compact-left"></i> Anterior</a>
-					</li>
-					<li class="page-item" [class.disabled]="page === totalPages.length">
-						<a class="page-link" (click)="obtenerPrueba(page + 1)">Siguiente<i class="bi bi-chevron-compact-right"></i></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div> -->
-	<!-- </div> -->
 </div>

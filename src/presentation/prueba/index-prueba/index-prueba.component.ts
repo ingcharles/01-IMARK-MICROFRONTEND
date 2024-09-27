@@ -52,10 +52,10 @@ export class IndexPruebaComponent implements OnInit {
 	public totalElements: number = 0;
 	//public numberOfElements: number = 0;
 	public pageSizeOptions: number[] = [5, 10, 25, 50, 100];
-	public titulo: string = 'Listado Prueba';
+	public title: string = 'Listado Prueba';
 	//public filterForm!: FormGroup;
-	public prueba: any[] = [];
-	public busqueda: string = '';
+	public pruebaRecords: any[] = [];
+	public search: string = '';
 	public loading: boolean = false;
 	// first = 0;
 
@@ -72,54 +72,39 @@ export class IndexPruebaComponent implements OnInit {
 		// });
 		this.loadData();
 	}
-	loadRecordsLazy(event: any) {
+
+	loadData(): void {
+		//const filters = this.filterForm.value;
+		this.loading = true;
+		const currentPrueba: IGetPruebaPaginadoViewModel = { page: this.page, size: this.size, search: this.search }
+		this._PruebaUseCase.getPruebaPaginado(currentPrueba).then(obs => {
+			this._loaderService.display(true);
+			obs.subscribe((result: any) => {
+				this._loaderService.display(false);
+				if (result.ok) {
+					this.pruebaRecords = result.data?.content!;
+					//this.totalPages = Array(result.data?.totalPages).fill(0).map((x, i) => i + 1);
+					this.totalElements = result.data?.totalElements;
+					//this.numberOfElements = result.data?.numberOfElements;
+				} else {
+					this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
+				}
+				this.loading = false;
+			});
+		});
+	}
+
+	changePage(event: any): void {
 		console.log("event", event)
 		// Cargar datos paginados desde el servidor
 		this.page = event.first / event.rows;
 		this.size = event.rows
 		this.loading = true;
-		//const filters = this.filterForm.value;
-		const currentPrueba: IGetPruebaPaginadoViewModel = { page: this.page, size: this.size, search: this.busqueda }
-		this._PruebaUseCase.getPruebaPaginado(currentPrueba).then(obs => {
-			this._loaderService.display(true);
-			obs.subscribe((result: any) => {
-				this._loaderService.display(false);
-				if (result.ok) {
-					this.prueba = result.data?.content!;
-					//this.totalPages = Array(result.data?.totalPages).fill(0).map((x, i) => i + 1);
-					this.totalElements = result.data?.totalElements;
-					//this.numberOfElements = result.data?.numberOfElements;
-
-				} else {
-					this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
-				}
-				this.loading = false;
-			});
-		});
+		this.loadData();
 	}
 
-	loadData(): void {
-		//const filters = this.filterForm.value;
-		this.loading = true;
-		const currentPrueba: IGetPruebaPaginadoViewModel = { page: this.page, size: this.size, search: this.busqueda }
-		this._PruebaUseCase.getPruebaPaginado(currentPrueba).then(obs => {
-			this._loaderService.display(true);
-			obs.subscribe((result: any) => {
-				this._loaderService.display(false);
-				if (result.ok) {
-					this.prueba = result.data?.content!;
-					//this.totalPages = Array(result.data?.totalPages).fill(0).map((x, i) => i + 1);
-					this.totalElements = result.data?.totalElements;
-					//this.numberOfElements = result.data?.numberOfElements;
-				} else {
-					this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
-				}
-				this.loading = false;
-			});
-		});
-	}
-	obtenerPrueba(event: any): void {
-		this.busqueda = event.target.value
+	inputSearch(event: any): void {
+		this.search = event.target.value
 		this.page = 0;
 		this.loadData();
 	}
@@ -134,18 +119,21 @@ export class IndexPruebaComponent implements OnInit {
 	// this.loadData();
 	// }
 
-	getSeverity(status: string): any {
+	getStatus(status: string): any {
 		switch (status) {
-			case 'INSTOCK':
+			case 'ACTIVO':
 				return 'success';
-			case 'LOWSTOCK':
+			case 'INACTIVO':
 				return 'warning';
 			case 'OUTOFSTOCK':
 				return 'danger';
+			default:
+				return '';
 		}
 	}
-	limpiarBusqueda(){
-		this.busqueda = '';
+
+	clearSearch(): void {
+		this.search = '';
 		this.loadData();
 	}
 }
