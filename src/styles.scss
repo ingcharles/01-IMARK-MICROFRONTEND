@@ -344,6 +344,12 @@ border: none;
   padding: 0;
 }
 
+.p-calendar .p-button {
+  padding: 0 !important;
+}
+.small-dropdown .p-dropdown-label {
+  padding: 0.5rem 0.75rem; /* Espaciado más pequeño dentro del dropdown */
+}
 // html,
 // body {
 //   height: 100%;

@@ -1,11 +1,11 @@
 /**
-* Vista create-prueba.component.ts
+* Vista create-prueba-uno.component.ts
 *
 * @author  Carlos Anchundia
 * @date    08-05-2024
-* @name    CreatePruebaComponent
+* @name    CreatePruebaUnoComponent
 * @package presentation
-* @subpackage prueba
+* @subpackage prueba-uno
 */
 
 import { CommonModule, DatePipe, Location } from '@angular/common';
@@ -18,8 +18,8 @@ import { AlertsService } from '../../../data/base/services/alerts.service';
 import { LoaderService } from '../../../data/base/services/loader.service';
 import { UtilsService } from '../../../data/base/services/utils.service';
 import { ValidatorsService } from '../../../data/base/services/validators.service';
-import { PruebaUseCase } from '../../../domain/prueba/usesCases/prueba.usecase';
-import { IGetPruebaByIdViewModel, ISavePruebaViewModel, IUpdatePruebaViewModel } from '../../../domain/prueba/viewModels/i-prueba.viewModel';
+import { PruebaUnoUseCase } from '../../../domain/prueba-uno/usesCases/prueba-uno.usecase';
+import { IGetPruebaUnoByIdViewModel, ISavePruebaUnoViewModel, IUpdatePruebaUnoViewModel } from '../../../domain/prueba-uno/viewModels/i-prueba-uno.viewModel';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -28,10 +28,15 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { FloatLabelModule } from 'primeng/floatlabel';
+
 @Component({
-	selector: 'create-prueba-page',
-	templateUrl: './create-prueba.component.html',
-	styleUrls: ['./create-prueba.component.scss'],
+	selector: 'create-prueba-uno-page',
+	templateUrl: './create-prueba-uno.component.html',
+	styleUrls: ['./create-prueba-uno.component.scss'],
 	standalone: true,
 	imports: [
 		CommonModule,
@@ -44,14 +49,17 @@ import { TooltipModule } from 'primeng/tooltip';
 		InputMaskModule,
 		InputSwitchModule,
 		InputTextareaModule,
-		TooltipModule
-
+		TooltipModule,
+		CalendarModule,
+		InputNumberModule,
+		DropdownModule,
+		FloatLabelModule,
 	],
 	providers: [],
 	host: {ngSkipHydration: 'true' }
 })
 
-export class CreatePruebaComponent implements OnInit {
+export class CreatePruebaUnoComponent implements OnInit {
 
 	constructor() { }
 
@@ -64,23 +72,35 @@ export class CreatePruebaComponent implements OnInit {
 	_loaderService: LoaderService = inject(LoaderService);
 	_alertsService: AlertsService = inject(AlertsService);
 	_validatorsService: ValidatorsService = inject(ValidatorsService);
-	_pruebaUseCase: PruebaUseCase = inject(PruebaUseCase);
+	_pruebaUnoUseCase: PruebaUnoUseCase = inject(PruebaUnoUseCase);
 
-	public title = 'Formulario Prueba';
+	public title = 'Formulario PruebaUno';
 
-	public formPrueba!: FormGroup;
-	navigated = false;
-	sub: any;
-	@Output() closePrueba = new EventEmitter();
+	public formPruebaUno!: FormGroup;
+	public checkedEstadoUno: boolean = false;
+	public navigated = false;
+	public sub: any;
+	public options = [
+	{name: 'Item 1', id: 1 },
+	{name: 'Item 2', id: 2 },
+	{name: 'Item 3', id: 3 }
+	];
+	@Output() closePruebaUno = new EventEmitter();
 
 
 	ngOnInit(): void {
 
 	this._utilsService.showTooltip(this._platformId);
 
-	this.formPrueba = new FormGroup({
-		id: new FormControl(null, [Validators.max(999999999)]),
-		nombre: new FormControl(null, [Validators.required, Validators.maxLength(8)]),
+	this.formPruebaUno = new FormGroup({
+		idUno: new FormControl(null, Validators.compose([Validators.max(999999999)])),
+		nombreUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(128)])),
+		fechaUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(8)])),
+		estadoUno: new FormControl(false, Validators.compose([Validators.requiredTrue, Validators.maxLength(8)])),
+		enteroUno: new FormControl(null, Validators.compose([Validators.required, Validators.min(1), Validators.max(999999999)])),
+		decimalUno: new FormControl(null, Validators.compose([Validators.required, Validators.min(0.01), Validators.max(999999999.99), Validators.pattern(this._validatorsService.patternTwoDecimal)])),
+		itemUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(8)])),
+		nombreLargoUno: new FormControl(null, Validators.compose([Validators.maxLength(500)])),
 	});
 
 	this.sub = this._activatedRoute.params.subscribe(params => {
@@ -88,12 +108,16 @@ export class CreatePruebaComponent implements OnInit {
 		const idParametro = params['id'];
 		if (idParametro != undefined) {
 			this.navigated = true;
-			let id: IGetPruebaByIdViewModel = { id: idParametro };
-			this._pruebaUseCase.getPruebaById(id).then(obs => {
+			let idUno: IGetPruebaUnoByIdViewModel = { idUno: idParametro };
+			this._pruebaUnoUseCase.getPruebaUnoById(idUno).then(obs => {
 				obs.subscribe((result) => {
 					this._loaderService.display(false);
 					if (result.ok) {
-						this.formPrueba.reset(result.data);
+						this.formPruebaUno.reset(result.data);
+						if (result.data?.fechaUno != null) {
+							var datePipe = new DatePipe('en-US');
+							this.formPruebaUno.get('fechaUno')?.setValue(datePipe.transform(result.data?.fechaUno, 'yyyy-MM-dd'));
+						}
 						} else {
 							this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
 						}
@@ -103,23 +127,26 @@ export class CreatePruebaComponent implements OnInit {
 		});
 	};
 
-	savePrueba(): void {
-		if (this.formPrueba.invalid) {
-			this.formPrueba.markAllAsTouched();
+	savePruebaUno(): void {
+		if (this.formPruebaUno.invalid) {
+			this.formPruebaUno.markAllAsTouched();
 			this._alertsService.alertMessage(messages.informativeTitle, messages.camposVacios, messages.isInfo);
 			return;
 		}
-		const currentPrueba:any = this.currentPrueba;
-
-		if (this.currentPrueba.id) {
+		const currentPruebaUno:any = this.currentPruebaUno;
+		console.log("a",currentPruebaUno)
+		currentPruebaUno.fechaUno = new Date(this.formPruebaUno.value.fechaUno).toISOString();
+		currentPruebaUno.itemUno=this.formPruebaUno?.get('itemUno')?.value.id
+		console.log("b",currentPruebaUno)
+		if (this.currentPruebaUno.idUno) {
 			this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmUpdate, () => {
-				this._pruebaUseCase.updatePrueba(currentPrueba as IUpdatePruebaViewModel).then(obs => {
+				this._pruebaUnoUseCase.updatePruebaUno(currentPruebaUno as IUpdatePruebaUnoViewModel).then(obs => {
 					this._loaderService.display(true);
 					obs.subscribe((result) => {
 						this._loaderService.display(false);
 						if (result.ok) {
 							this._alertsService.alertMessage(messages.successTitle, messages.successUpdate, messages.isSuccess);
-							this._router.navigateByUrl('index-prueba');
+							this._router.navigateByUrl('index-prueba-uno');
 						} else {
 							this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
 						}
@@ -130,14 +157,14 @@ export class CreatePruebaComponent implements OnInit {
 		};
 
 	this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmSave, () => {
-		this._pruebaUseCase.savePrueba(currentPrueba as ISavePruebaViewModel).then(obs => {
+		this._pruebaUnoUseCase.savePruebaUno(currentPruebaUno as ISavePruebaUnoViewModel).then(obs => {
 		this._loaderService.display(true);
 		obs.subscribe((result) => {
 			this._loaderService.display(false);
 			if (result.ok) {
 			this._alertsService.alertMessage(messages.successTitle, messages.successSave, messages.isSuccess);
-				this.formPrueba.get('id')!.patchValue(result.data?.id);
-				this._router.navigateByUrl('index-prueba');
+				this.formPruebaUno.get('idUno')!.patchValue(result.data?.idUno);
+				this._router.navigateByUrl('index-prueba-uno');
 			} else {
 			this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
 				}
@@ -146,13 +173,17 @@ export class CreatePruebaComponent implements OnInit {
 	});
 	};
 
-	public cancelPrueba(): void{
-		this.closePrueba.emit(true);
+	public cancelPruebaUno(): void{
+		this.closePruebaUno.emit(true);
 		this._location.back();
 	};
 
-	private get currentPrueba(): IUpdatePruebaViewModel {
-		return this.formPrueba.value as IUpdatePruebaViewModel;
+	public onChangeEstadoUno(event: any): void {
+		this.checkedEstadoUno = event.checked;
+	};
+
+	private get currentPruebaUno(): IUpdatePruebaUnoViewModel {
+		return this.formPruebaUno.value as IUpdatePruebaUnoViewModel;
 	};
 
 }

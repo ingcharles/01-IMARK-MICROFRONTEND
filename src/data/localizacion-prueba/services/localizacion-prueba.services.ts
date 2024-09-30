@@ -16,6 +16,7 @@ import { IGetLocalizacionPruebaRsViewModel, IGetLocalizacionPruebaViewModel, IGe
 import { StatusResponseService } from '../../base/services/status-response.service';
 import { IResponseStatusViewModel } from '../../../domain/base/viewModels/i-response-status.viewModel';
 import { environment } from '../../../environments/environment';
+import { IResultApi } from '../../base/interfaces/IResultApi';
 
 const apiUrl: string = environment.apiUrl;
 
@@ -42,7 +43,7 @@ export class LocalizacionPruebaService  {
 	public async saveLocalizacionPrueba(localizacionPrueba: ISaveLocalizacionPruebaViewModel): Promise<Observable<IResponseStatusViewModel<ISaveLocalizacionPruebaRsViewModel>>>{
 	localizacionPrueba.auditoria = 'transaccionAuditoria';
 	const url = `${apiUrl}command/localizacion-prueba/saveLocalizacionPrueba`;
-	return this._http.post<ISaveLocalizacionPruebaRsViewModel>(url, localizacionPrueba).pipe(
+	return this._http.post<IResultApi>(url, localizacionPrueba).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<ISaveLocalizacionPruebaRsViewModel>(result);
 		}),
@@ -59,7 +60,7 @@ export class LocalizacionPruebaService  {
 	*/
 	public async getLocalizacionPrueba(busqueda: IGetLocalizacionPruebaViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaRsViewModel>>>{
 	const url = `${apiUrl}query/localizacion-prueba/getLocalizacionPrueba`;
-	return this._http.post<IGetLocalizacionPruebaRsViewModel>(url, busqueda).pipe(
+	return this._http.post<IResultApi>(url, busqueda).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IGetLocalizacionPruebaRsViewModel>(result);
 		}),
@@ -76,7 +77,7 @@ export class LocalizacionPruebaService  {
 	*/
 	public async getLocalizacionPruebaPaginado(dataViewModel: IGetLocalizacionPruebaPaginadoViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaPaginadoRsViewModel>>>{
 	const url = `${apiUrl}query/localizacion-prueba/findAllPaginateLocalizacionPrueba`;
-	return this._http.post<IGetLocalizacionPruebaPaginadoRsViewModel>(url, dataViewModel).pipe(
+	return this._http.post<IResultApi>(url, dataViewModel).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IGetLocalizacionPruebaPaginadoRsViewModel>(result);
 		}),
@@ -93,7 +94,7 @@ export class LocalizacionPruebaService  {
 	*/
 	public async getLocalizacionPruebaById(id_localizacion_prueba: IGetLocalizacionPruebaByIdViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaByIdRsViewModel>>>{
 	const url = `${apiUrl}query/localizacion-prueba/findByIdLocalizacionPrueba`;
-	return this._http.post<IGetLocalizacionPruebaByIdRsViewModel>(url, id_localizacion_prueba).pipe(
+	return this._http.post<IResultApi>(url, id_localizacion_prueba).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IGetLocalizacionPruebaByIdRsViewModel>(result);
 		}),
@@ -111,7 +112,7 @@ export class LocalizacionPruebaService  {
 	public async updateLocalizacionPrueba(localizacionPrueba: IUpdateLocalizacionPruebaViewModel): Promise<Observable<IResponseStatusViewModel<IUpdateLocalizacionPruebaRsViewModel>>>{
 	localizacionPrueba.auditoria = 'transaccionAuditoria';
 	const url = `${apiUrl}command/localizacion-prueba/updateLocalizacionPrueba`;
-	return this._http.post<IUpdateLocalizacionPruebaRsViewModel>(url, localizacionPrueba).pipe(
+	return this._http.post<IResultApi>(url, localizacionPrueba).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IUpdateLocalizacionPruebaRsViewModel>(result);
 		}),

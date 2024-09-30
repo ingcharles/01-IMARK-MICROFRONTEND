@@ -52,26 +52,26 @@ export const routes: Routes = [
     title: 'Dashboard'
   },
   {
-    path: 'index-prueba',
+    path: 'index-prueba-uno',
     loadComponent: () =>
-      import('../presentation/prueba/index-prueba/index-prueba.component').then(
-        (c) => c.IndexPruebaComponent
+      import('../presentation/prueba-uno/index-prueba-uno/index-prueba-uno.component').then(
+        (c) => c.IndexPruebaUnoComponent
       ),
     title: 'Dashboard'
   },
   {
-    path: 'create-prueba',
+    path: 'create-prueba-uno',
     loadComponent: () =>
-      import('../presentation/prueba/create-prueba/create-prueba.component').then(
-        (c) => c.CreatePruebaComponent
+      import('../presentation/prueba-uno/create-prueba-uno/create-prueba-uno.component').then(
+        (c) => c.CreatePruebaUnoComponent
       ),
     title: 'Dashboard'
   },
   {
-    path: 'edit-prueba/:id',
+    path: 'edit-prueba-uno/:id',
     loadComponent: () =>
-      import('../presentation/prueba/create-prueba/create-prueba.component').then(
-        (c) => c.CreatePruebaComponent
+      import('../presentation/prueba-uno/create-prueba-uno/create-prueba-uno.component').then(
+        (c) => c.CreatePruebaUnoComponent
       ),
     title: 'Dashboard'
   },

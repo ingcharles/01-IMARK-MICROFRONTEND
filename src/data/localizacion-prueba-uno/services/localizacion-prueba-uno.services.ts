@@ -16,6 +16,7 @@ import { IResponseStatusViewModel } from '../../../domain/base/viewModels/i-resp
 import { IGetLocalizacionPruebaUnoByIdRsViewModel, IGetLocalizacionPruebaUnoByIdViewModel, IGetLocalizacionPruebaUnoPaginadoRsViewModel, IGetLocalizacionPruebaUnoPaginadoViewModel, IGetLocalizacionPruebaUnoRsViewModel, IGetLocalizacionPruebaUnoViewModel, ISaveLocalizacionPruebaUnoRsViewModel, ISaveLocalizacionPruebaUnoViewModel, IUpdateLocalizacionPruebaUnoRsViewModel, IUpdateLocalizacionPruebaUnoViewModel } from '../../../domain/localizacion-prueba-uno/viewModels/i-localizacion-prueba-uno.viewModel';
 import { environment } from '../../../environments/environment';
 import { StatusResponseService } from '../../base/services/status-response.service';
+import { IResultApi } from '../../base/interfaces/IResultApi';
 
 const apiUrl: string = environment.apiUrl;
 
@@ -42,7 +43,7 @@ export class LocalizacionPruebaUnoService  {
 	public async saveLocalizacionPruebaUno(localizacionPruebaUno: ISaveLocalizacionPruebaUnoViewModel): Promise<Observable<IResponseStatusViewModel<ISaveLocalizacionPruebaUnoRsViewModel>>>{
 	localizacionPruebaUno.auditoria = 'transaccionAuditoria';
 	const url = `${apiUrl}command/localizacion-prueba-uno/saveLocalizacionPruebaUno`;
-	return this._http.post<ISaveLocalizacionPruebaUnoRsViewModel>(url, localizacionPruebaUno).pipe(
+	return this._http.post<IResultApi>(url, localizacionPruebaUno).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<ISaveLocalizacionPruebaUnoRsViewModel>(result);
 		}),
@@ -59,7 +60,7 @@ export class LocalizacionPruebaUnoService  {
 	*/
 	public async getLocalizacionPruebaUno(busqueda: IGetLocalizacionPruebaUnoViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaUnoRsViewModel>>>{
 	const url = `${apiUrl}query/localizacion-prueba-uno/getLocalizacionPruebaUno`;
-	return this._http.post<IGetLocalizacionPruebaUnoRsViewModel>(url, busqueda).pipe(
+	return this._http.post<IResultApi>(url, busqueda).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IGetLocalizacionPruebaUnoRsViewModel>(result);
 		}),
@@ -76,7 +77,7 @@ export class LocalizacionPruebaUnoService  {
 	*/
 	public async getLocalizacionPruebaUnoPaginado(dataViewModel: IGetLocalizacionPruebaUnoPaginadoViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaUnoPaginadoRsViewModel>>>{
 	const url = `${apiUrl}query/localizacion-prueba-uno/findAllPaginateLocalizacionPruebaUno`;
-	return this._http.post<IGetLocalizacionPruebaUnoPaginadoRsViewModel>(url, dataViewModel).pipe(
+	return this._http.post<IResultApi>(url, dataViewModel).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IGetLocalizacionPruebaUnoPaginadoRsViewModel>(result);
 		}),
@@ -93,7 +94,7 @@ export class LocalizacionPruebaUnoService  {
 	*/
 	public async getLocalizacionPruebaUnoById(campo_serial: IGetLocalizacionPruebaUnoByIdViewModel): Promise<Observable<IResponseStatusViewModel<IGetLocalizacionPruebaUnoByIdRsViewModel>>>{
 	const url = `${apiUrl}query/localizacion-prueba-uno/findByIdLocalizacionPruebaUno`;
-	return this._http.post<IGetLocalizacionPruebaUnoByIdRsViewModel>(url, campo_serial).pipe(
+	return this._http.post<IResultApi>(url, campo_serial).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IGetLocalizacionPruebaUnoByIdRsViewModel>(result);
 		}),
@@ -111,7 +112,7 @@ export class LocalizacionPruebaUnoService  {
 	public async updateLocalizacionPruebaUno(localizacionPruebaUno: IUpdateLocalizacionPruebaUnoViewModel): Promise<Observable<IResponseStatusViewModel<IUpdateLocalizacionPruebaUnoRsViewModel>>>{
 	localizacionPruebaUno.auditoria = 'transaccionAuditoria';
 	const url = `${apiUrl}command/localizacion-prueba-uno/updateLocalizacionPruebaUno`;
-	return this._http.post<IUpdateLocalizacionPruebaUnoRsViewModel>(url, localizacionPruebaUno).pipe(
+	return this._http.post<IResultApi>(url, localizacionPruebaUno).pipe(
 		map((result) => {
 		return this._statusResponseService.succes<IUpdateLocalizacionPruebaUnoRsViewModel>(result);
 		}),
