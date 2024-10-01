@@ -34,7 +34,7 @@
 						<div class="field col-12 md:col-6">
 							<label for="fechaUno"> fechaUno (*)</label>
 							<p-calendar id="fechaUno" name="fechaUno" formControlName="fechaUno" class="p-inputtext-sm" dateFormat="dd/mm/yy" 
-							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('fechaUno',formPruebaUno)}" tooltipPosition="top"
+							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('fechaUno',formPruebaUno)}"
 							[pTooltip]="_utilsService.getFieldErrorRequired('fechaUno', formPruebaUno)" placeholder="" />
 						</div>
 
@@ -52,7 +52,8 @@
 							<p-inputNumber id="enteroUno" name="enteroUno" formControlName="enteroUno" size="small" class="p-inputtext-sm "  
 							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('enteroUno',formPruebaUno)}"
 							[pTooltip]="_utilsService.getFieldErrorRequired('enteroUno', formPruebaUno)" tooltipPosition="top"
-							(keypress)="this._validatorsService.validarSoloNumeros($event)" placeholder="" />
+							(keypress)="this._validatorsService.validarSoloNumeros($event)" 
+							 placeholder="" />
 						</div>
 
 						<div class="field col-12 md:col-6">
@@ -61,16 +62,18 @@
 							mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" 
 							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('decimalUno',formPruebaUno)}"
 							[pTooltip]="_utilsService.getFieldErrorRequired('decimalUno', formPruebaUno)" tooltipPosition="top"
-							(keypress)="this._validatorsService.validarSoloDecimales($event)" placeholder="" />
+							(keypress)="this._validatorsService.validarSoloDecimales($event)" 
+							 placeholder="" />
 						</div>
 
 						<div class="field col-12 md:col-6">
 							<label for="itemUno"> itemUno (*)</label>
 							<p-dropdown id="itemUno" name="itemUno" class="small-dropdown" 
 							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('itemUno',formPruebaUno)}"
-							formControlName="itemUno" placeholder="Seleccione" 
-							required="required" [pTooltip]="_utilsService.getFieldErrorRequired('itemUno', formPruebaUno)"
-							[options]="optionsItemUno" optionLabel="name" />
+							formControlName="itemUno" placeholder="Select a options" 
+							required="required"  
+							[pTooltip]="_utilsService.getFieldErrorRequired('itemUno', formPruebaUno)"
+							[options]="options" optionLabel="name" />
 						</div>
 
 						<div class="field col-12 md:col-6">
@@ -84,7 +87,7 @@
 
 					</div>
 				</p-fieldset>
-				<div class="p-fluid formgrid grid my-2 justify-content-end">
+				<div class="flex align-items-center justify-content-end my-2">
 					<p-button label="Cancelar" type="button" icon="pi pi-times" class="mr-2" size="small" severity="danger" (click)="cancelPruebaUno()" />
 					<p-button label="Guardar" type="submit" icon="pi pi-save" class="mr-2" size="small" severity="primary" />
 				</div>

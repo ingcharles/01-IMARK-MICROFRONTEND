@@ -49,14 +49,14 @@ export class IndexPruebaUnoComponent implements OnInit {
 	public title:string = 'Listado PruebaUno';
 	public pruebaUnoRecords: any[] = [];
 	public search: string = '';
-	public sortBy: string = 'idUno';
-	public sortDirection: string = 'ASC';
+		public sortBy: string = 'idUno';
+		public sortDirection: string = 'ASC';
 	public loading: boolean = false;
 
-	public ngOnInit(): void {
+	ngOnInit(): void {
 	}
 
-	public loadData(): void {
+	loadData(): void {
 		this.loading = true;
 		const currentPruebaUno: IGetPruebaUnoPaginadoViewModel = {page: this.page, size: this.size, search: this.search, sortBy: this.sortBy, sortDirection: this.sortDirection }
 		this._PruebaUnoUseCase.getPruebaUnoPaginado(currentPruebaUno).then(obs => {
@@ -74,20 +74,20 @@ export class IndexPruebaUnoComponent implements OnInit {
 		});
 	}
 
-	public inputSearch(event: any): void {
+	inputSearch(event: any): void {
 		this.page = event.first / event.rows;
-		this.size = event.rows;
+		this.size = event.rows
 		this.loading = true;
 		this.loadData();
 	}
 
-	public changePage(event: any): void {
+	changePage(event: any): void {
 		this.size = event.target.value;
 		this.page = 0;
 		this.loadData();
 	}
 
-	public getStatus(status: string): any {
+	getStatus(status: string): any {
 		switch (status) {
 			case 'ACTIVO':
 				return 'success';
@@ -100,12 +100,12 @@ export class IndexPruebaUnoComponent implements OnInit {
 		}
 	}
 
-	public clearSearch(): void {
+	clearSearch(): void {
 		this.search = '';
 		this.loadData();
 	}
 
-	public lazyLoadData(event: any) {
+	lazyLoadData(event: any) {
 		this.page = event.first / event.rows;
 		this.size = event.rows
 		this.sortBy = event.sortField || 'idUno';

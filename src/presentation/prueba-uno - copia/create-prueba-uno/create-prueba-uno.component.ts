@@ -74,47 +74,58 @@ export class CreatePruebaUnoComponent implements OnInit {
 	_validatorsService: ValidatorsService = inject(ValidatorsService);
 	_pruebaUnoUseCase: PruebaUnoUseCase = inject(PruebaUnoUseCase);
 
-	@Output() closePruebaUno = new EventEmitter();
 	public title = 'Formulario PruebaUno';
+
 	public formPruebaUno!: FormGroup;
+	public checkedEstadoUno: boolean = false;
 	public navigated = false;
 	public sub: any;
-	public checkedEstadoUno: boolean = false;
-	public optionsItemUno = [
-	{name: 'Item 1', id: 1 },
-	{name: 'Item 2', id: 2 },
-	{name: 'Item 3', id: 3 }
-	];
+	public options: any;
+	@Output() closePruebaUno = new EventEmitter();
+
 
 	ngOnInit(): void {
+		this.options = [
+			{name: 'Item 1', id: 1 },
+			{name: 'Item 2', id: 2 },
+			{name: 'Item 3', id: 3 }
+			];
+	this._utilsService.showTooltip(this._platformId);
 
-		this.formPruebaUno = new FormGroup({
-			idUno: new FormControl(null, Validators.compose([Validators.max(999999999)])),
-			nombreUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(128)])),
-			fechaUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(8)])),
-			estadoUno: new FormControl(false, Validators.compose([Validators.requiredTrue, Validators.maxLength(8)])),
-			enteroUno: new FormControl(null, Validators.compose([Validators.required, Validators.min(1), Validators.max(999999999)])),
-			decimalUno: new FormControl(null, Validators.compose([Validators.required, Validators.min(0.01), Validators.max(999999999.99), Validators.pattern(this._validatorsService.patternTwoDecimal)])),
-			itemUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(8)])),
-			nombreLargoUno: new FormControl(null, Validators.compose([Validators.maxLength(500)])),
-		});
+	this.formPruebaUno = new FormGroup({
+		idUno: new FormControl(null, Validators.compose([Validators.max(999999999)])),
+		nombreUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(128)])),
+		fechaUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(8)])),
+		estadoUno: new FormControl(false, Validators.compose([Validators.requiredTrue, Validators.maxLength(8)])),
+		enteroUno: new FormControl(null, Validators.compose([Validators.required, Validators.min(1), Validators.max(999999999)])),
+		decimalUno: new FormControl(null, Validators.compose([Validators.required, Validators.min(0.01), Validators.max(999999999.99), Validators.pattern(this._validatorsService.patternTwoDecimal)])),
+		itemUno: new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(8)])),
+		nombreLargoUno: new FormControl(null, Validators.compose([Validators.maxLength(500)])),
+	});
 
-		this.sub = this._activatedRoute.params.subscribe(params => {
+	this.sub = this._activatedRoute.params.subscribe(params => {
+		this.navigated = true;
+		const idParametro = params['id'];
+		if (idParametro != undefined) {
 			this.navigated = true;
-			const idParametro = params['id'];
-			if (idParametro != undefined) {
-				this.navigated = true;
-				let idUno: IGetPruebaUnoByIdViewModel = { idUno: idParametro };
-				this._pruebaUnoUseCase.getPruebaUnoById(idUno).then(obs => {
-					obs.subscribe((result) => {
-						this._loaderService.display(false);
-						if (result.ok) {
-							this.formPruebaUno.reset(result.data);
-							if (result.data?.fechaUno != null) {
-								this.formPruebaUno.get('fechaUno')?.setValue(new Date(result.data?.fechaUno));
-							}
-							const itemUno = this.optionsItemUno.find((item: any) => item.id == result.data?.itemUno!);
-							this.formPruebaUno.get('itemUno')?.setValue(itemUno);
+			let idUno: IGetPruebaUnoByIdViewModel = { idUno: idParametro };
+			this._pruebaUnoUseCase.getPruebaUnoById(idUno).then(obs => {
+				obs.subscribe((result) => {
+					this._loaderService.display(false);
+					if (result.ok) {
+						console.log("result.data",result.data)
+						//2024-10-09T05:00:00.000Z
+						//this.formPruebaUno.value.fechaUno = '03/09/2024'
+						this.formPruebaUno.reset(result.data);
+						const itemUno = this.options.find((r:any)=>r.id==result.data?.itemUno! )
+						this.formPruebaUno.get('itemUno')?.setValue(itemUno);
+						
+						
+						if (result.data?.fechaUno != null) {
+							// var datePipe = new DatePipe('en-US
+							this.formPruebaUno.get('fechaUno')?.setValue(new Date(result.data?.fechaUno));
+							// this.formPruebaUno.get('fechaUno')?.setValue(datePipe.transform(result.data?.fechaUno, 'yyyy-MM-dd'));
+						}
 						} else {
 							this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
 						}
@@ -122,18 +133,18 @@ export class CreatePruebaUnoComponent implements OnInit {
 				});
 			};
 		});
-	}
+	};
 
-	public savePruebaUno(): void {
-
+	savePruebaUno(): void {
 		if (this.formPruebaUno.invalid) {
 			this.formPruebaUno.markAllAsTouched();
 			this._alertsService.alertMessage(messages.informativeTitle, messages.camposVacios, messages.isInfo);
 			return;
 		}
-
 		const currentPruebaUno:any = this.currentPruebaUno;
-
+		console.log("currentPruebaUno",currentPruebaUno)
+		//currentPruebaUno.fechaUno = new Date(this.formPruebaUno.value.fechaUno).toISOString();
+		currentPruebaUno.itemUno = this.formPruebaUno.value.itemUno.id
 		if (this.currentPruebaUno.idUno) {
 			this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmUpdate, () => {
 				this._pruebaUnoUseCase.updatePruebaUno(currentPruebaUno as IUpdatePruebaUnoViewModel).then(obs => {
@@ -150,36 +161,36 @@ export class CreatePruebaUnoComponent implements OnInit {
 				});
 			});
 			return;
-		}
+		};
 
-		this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmSave, () => {
-			this._pruebaUnoUseCase.savePruebaUno(currentPruebaUno as ISavePruebaUnoViewModel).then(obs => {
-				this._loaderService.display(true);
-				obs.subscribe((result) => {
-					this._loaderService.display(false);
-					if (result.ok) {
-						this._alertsService.alertMessage(messages.successTitle, messages.successSave, messages.isSuccess);
-						this.formPruebaUno.get('idUno')!.patchValue(result.data?.idUno);
-						this._router.navigateByUrl('index-prueba-uno');
-					} else {
-						this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
-					}
-				});
+	this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmSave, () => {
+		this._pruebaUnoUseCase.savePruebaUno(currentPruebaUno as ISavePruebaUnoViewModel).then(obs => {
+		this._loaderService.display(true);
+		obs.subscribe((result) => {
+			this._loaderService.display(false);
+			if (result.ok) {
+			this._alertsService.alertMessage(messages.successTitle, messages.successSave, messages.isSuccess);
+				this.formPruebaUno.get('idUno')!.patchValue(result.data?.idUno);
+				this._router.navigateByUrl('index-prueba-uno');
+			} else {
+			this._alertsService.alertMessage(messages.warningTitle, result.message, messages.isWarning);
+				}
 			});
 		});
-	}
+	});
+	};
 
 	public cancelPruebaUno(): void{
 		this.closePruebaUno.emit(true);
 		this._location.back();
-	}
+	};
 
 	public onChangeEstadoUno(event: any): void {
 		this.checkedEstadoUno = event.checked;
-	}
+	};
 
 	private get currentPruebaUno(): IUpdatePruebaUnoViewModel {
 		return this.formPruebaUno.value as IUpdatePruebaUnoViewModel;
-	}
+	};
 
 }

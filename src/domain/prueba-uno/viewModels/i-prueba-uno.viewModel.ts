@@ -81,6 +81,8 @@ export interface IGetPruebaUnoPaginadoViewModel {
 	page: number;
 	size: number;
 	search: string;
+	sortBy: string;
+	sortDirection: string;
 }
 
 /**
