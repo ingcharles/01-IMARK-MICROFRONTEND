@@ -9,9 +9,9 @@
 */
 
 import { CommonModule, DatePipe, Location } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, PLATFORM_ID, inject} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, PLATFORM_ID, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { messages } from '../../../data/base/constants/messages';
 import { TooltipDirective } from '../../../data/base/directives/tooltip-directive';
 import { AlertsService } from '../../../data/base/services/alerts.service';
@@ -56,7 +56,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 		FloatLabelModule,
 	],
 	providers: [],
-	host: {ngSkipHydration: 'true' }
+	host: { ngSkipHydration: 'true' }
 })
 
 export class CreatePruebaUnoComponent implements OnInit {
@@ -81,9 +81,9 @@ export class CreatePruebaUnoComponent implements OnInit {
 	public sub: any;
 	public checkedEstadoUno: boolean = false;
 	public optionsItemUno = [
-	{name: 'Item 1', id: 1 },
-	{name: 'Item 2', id: 2 },
-	{name: 'Item 3', id: 3 }
+		{ name: 'Item 1', id: 1 },
+		{ name: 'Item 2', id: 2 },
+		{ name: 'Item 3', id: 3 }
 	];
 
 	ngOnInit(): void {
@@ -132,7 +132,8 @@ export class CreatePruebaUnoComponent implements OnInit {
 			return;
 		}
 
-		const currentPruebaUno:any = this.currentPruebaUno;
+		const currentPruebaUno: any = this.currentPruebaUno;
+		currentPruebaUno.idUno = currentPruebaUno.idUno.id;
 
 		if (this.currentPruebaUno.idUno) {
 			this._alertsService.alertConfirm(messages.confirmationTitle, messages.confirmUpdate, () => {
@@ -169,7 +170,7 @@ export class CreatePruebaUnoComponent implements OnInit {
 		});
 	}
 
-	public cancelPruebaUno(): void{
+	public cancelPruebaUno(): void {
 		this.closePruebaUno.emit(true);
 		this._location.back();
 	}

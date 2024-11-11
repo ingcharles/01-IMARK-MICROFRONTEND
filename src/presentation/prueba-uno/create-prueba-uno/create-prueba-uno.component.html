@@ -26,32 +26,31 @@
 						<div class="field col-12 md:col-6">
 							<label for="nombreUno"> nombreUno (*)</label>
 							<input pInputText id="nombreUno" name="nombreUno" formControlName="nombreUno" class="p-inputtext-sm w-full"  
-							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('nombreUno',formPruebaUno)}"
-							[pTooltip]="_utilsService.getFieldErrorRequired('nombreUno', formPruebaUno)" tooltipPosition="top"
+							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('nombreUno',formPruebaUno)}" 
+							[pTooltip]="_utilsService.getFieldErrorRequired('nombreUno', formPruebaUno)" tooltipPosition="top" 
 							(keypress)="this._validatorsService.validarAlfanumericos($event)"  placeholder="" />
 						</div>
 
 						<div class="field col-12 md:col-6">
 							<label for="fechaUno"> fechaUno (*)</label>
 							<p-calendar id="fechaUno" name="fechaUno" formControlName="fechaUno" class="p-inputtext-sm" dateFormat="dd/mm/yy" 
-							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('fechaUno',formPruebaUno)}" tooltipPosition="top"
-							[pTooltip]="_utilsService.getFieldErrorRequired('fechaUno', formPruebaUno)" placeholder="" />
+							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('fechaUno',formPruebaUno)}" 
+							[pTooltip]="_utilsService.getFieldErrorRequired('fechaUno', formPruebaUno)" tooltipPosition="top" placeholder ="" />
 						</div>
 
 						<div class="field col-12 md:col-6">
 							<label for="estadoUno"> estadoUno (*)</label>
 							<p-inputSwitch id="estadoUno" name="estadoUno"
-							[ngClass]="{'ng-dirty ng-invalid': _utilsService.isFieldInvalid('estadoUno',formPruebaUno)}"
 							formControlName="estadoUno" (onChange)="onChangeEstadoUno($event)" 
-							required="required"  
-							[pTooltip]="_utilsService.getFieldErrorRequired('estadoUno', formPruebaUno)" tooltipPosition="top"/>
+							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('estadoUno',formPruebaUno)}" 
+							[pTooltip]="_utilsService.getFieldErrorRequired('estadoUno', formPruebaUno)" tooltipPosition="top" />
 						</div>
 
 						<div class="field col-12 md:col-6">
 							<label for="enteroUno"> enteroUno (*)</label>
 							<p-inputNumber id="enteroUno" name="enteroUno" formControlName="enteroUno" size="small" class="p-inputtext-sm "  
-							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('enteroUno',formPruebaUno)}"
-							[pTooltip]="_utilsService.getFieldErrorRequired('enteroUno', formPruebaUno)" tooltipPosition="top"
+							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('enteroUno',formPruebaUno)}" 
+							[pTooltip]="_utilsService.getFieldErrorRequired('enteroUno', formPruebaUno)" tooltipPosition="top" 
 							(keypress)="this._validatorsService.validarSoloNumeros($event)" placeholder="" />
 						</div>
 
@@ -59,27 +58,23 @@
 							<label for="decimalUno"> decimalUno (*)</label>
 							<p-inputNumber id="decimalUno" name="decimalUno" formControlName="decimalUno" size="small" class="p-inputtext-sm "  
 							mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" 
-							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('decimalUno',formPruebaUno)}"
-							[pTooltip]="_utilsService.getFieldErrorRequired('decimalUno', formPruebaUno)" tooltipPosition="top"
+							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('decimalUno',formPruebaUno)}" 
+							[pTooltip]="_utilsService.getFieldErrorRequired('decimalUno', formPruebaUno)" tooltipPosition="top" 
 							(keypress)="this._validatorsService.validarSoloDecimales($event)" placeholder="" />
 						</div>
 
 						<div class="field col-12 md:col-6">
 							<label for="itemUno"> itemUno (*)</label>
 							<p-dropdown id="itemUno" name="itemUno" class="small-dropdown" 
-							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('itemUno',formPruebaUno)}"
-							formControlName="itemUno" placeholder="Seleccione" 
-							required="required" [pTooltip]="_utilsService.getFieldErrorRequired('itemUno', formPruebaUno)"
-							[options]="optionsItemUno" optionLabel="name" />
+							formControlName="itemUno" placeholder="Seleccione" [options]="optionsItemUno" optionLabel="name"
+							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('itemUno',formPruebaUno)}" 
+							[pTooltip]="_utilsService.getFieldErrorRequired('itemUno', formPruebaUno)" tooltipPosition="top" />
 						</div>
 
 						<div class="field col-12 md:col-6">
 							<label for="nombreLargoUno"> nombreLargoUno</label>
-							<textarea pInputTextarea id="nombreLargoUno" name="nombreLargoUno" formControlName="nombreLargoUno" class="p-inputtext-sm w-full"  
-							[ngClass]="{'ng-invalid ng-dirty': _utilsService.isFieldInvalid('nombreLargoUno',formPruebaUno)}"
-							[pTooltip]="_utilsService.getFieldErrorRequired('nombreLargoUno', formPruebaUno)" tooltipPosition="top"
-							(keypress)="this._validatorsService.validarAlfanumericos($event)" 
-							placeholder="" ></textarea>
+							<textarea pInputTextarea id="nombreLargoUno" name="nombreLargoUno" formControlName="nombreLargoUno" class="p-inputtext-sm w-full"    
+							(keypress)="this._validatorsService.validarAlfanumericos($event)" placeholder="" ></textarea>
 						</div>
 
 					</div>

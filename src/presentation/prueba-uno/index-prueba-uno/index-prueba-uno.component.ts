@@ -75,9 +75,7 @@ export class IndexPruebaUnoComponent implements OnInit {
 	}
 
 	public inputSearch(event: any): void {
-		this.page = event.first / event.rows;
-		this.size = event.rows;
-		this.loading = true;
+		this.search = event.target.value;
 		this.loadData();
 	}
 
@@ -87,16 +85,14 @@ export class IndexPruebaUnoComponent implements OnInit {
 		this.loadData();
 	}
 
-	public getStatus(status: string): any {
+	public getStatus(status: boolean): any {
 		switch (status) {
-			case 'ACTIVO':
-				return 'success';
-			case 'INACTIVO':
-				return 'warning';
-			case 'OUTOFSTOCK':
+			case true:
+				return 'primary';
+			case false:
 				return 'danger';
 			default:
-				return '';
+				return 'warning';
 		}
 	}
 
